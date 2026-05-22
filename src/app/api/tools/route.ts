@@ -232,7 +232,7 @@ ${Object.keys(compose.volumes).map(v => `  ${v}:`).join('\n')}
 }
 
 async function handleInstall(toolIds: string[], options?: Record<string, unknown>) {
-  const results = [];
+  const results: Array<{ toolId: string; success: boolean; error?: string; message?: string; installCommand?: string; dockerImage?: string }> = [];
   
   for (const toolId of toolIds) {
     const t = getToolBySlug(toolId);
@@ -265,7 +265,7 @@ async function handleInstall(toolIds: string[], options?: Record<string, unknown
 }
 
 async function handleUninstall(toolIds: string[]) {
-  const results = [];
+  const results: Array<{ toolId: string; success: boolean; error?: string; message?: string; uninstallCommand?: string }> = [];
   
   for (const toolId of toolIds) {
     const t = getToolBySlug(toolId);
@@ -278,7 +278,7 @@ async function handleUninstall(toolIds: string[]) {
       toolId, 
       success: true, 
       message: `${t.name} uninstall initiated`,
-      uninstallCommand: t.uninstallCmd || `pip uninstall ${t.name.toLowerCase()} -y`
+      uninstallCommand: `pip uninstall ${t.name.toLowerCase()} -y`
     });
   }
 
@@ -286,7 +286,7 @@ async function handleUninstall(toolIds: string[]) {
 }
 
 async function handleConfigure(toolIds: string[], options?: Record<string, unknown>) {
-  const results = [];
+  const results: Array<{ toolId: string; success: boolean; error?: string; config?: Record<string, unknown>; message?: string }> = [];
   
   for (const toolId of toolIds) {
     const t = getToolBySlug(toolId);

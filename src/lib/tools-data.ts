@@ -1809,7 +1809,7 @@ export const aiTools: Tool[] = [
     icon: '🎮',
     tags: ['nvidia', 'gpu', 'parallel'],
     homepage: 'https://developer.nvidia.com/cuda-toolkit',
-    requirements: { gpu: 'NVIDIA GPU' },
+    requirements: { os: ['Linux', 'Windows'], gpu: 'NVIDIA GPU' },
     isPopular: true,
     status: 'available'
   },
@@ -1822,7 +1822,7 @@ export const aiTools: Tool[] = [
     icon: '⚡',
     tags: ['nvidia', 'deep-learning', 'acceleration'],
     homepage: 'https://developer.nvidia.com/cudnn',
-    requirements: { gpu: 'NVIDIA GPU with CUDA' },
+    requirements: { os: ['Linux', 'Windows'], gpu: 'NVIDIA GPU with CUDA' },
     status: 'available'
   },
   {
@@ -1834,7 +1834,7 @@ export const aiTools: Tool[] = [
     icon: '🚀',
     tags: ['inference', 'optimization', 'nvidia'],
     homepage: 'https://developer.nvidia.com/tensorrt',
-    requirements: { gpu: 'NVIDIA GPU with CUDA 11.8+' },
+    requirements: { os: ['Linux', 'Windows'], gpu: 'NVIDIA GPU with CUDA 11.8+' },
     status: 'available'
   },
   {
@@ -2218,7 +2218,7 @@ export const aiTools: Tool[] = [
     icon: '🎮',
     tags: ['nvidia', 'gpu', 'containers'],
     homepage: 'https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/',
-    requirements: { gpu: 'NVIDIA GPU' },
+    requirements: { os: ['Linux'], gpu: 'NVIDIA GPU' },
     status: 'available'
   },
   {
