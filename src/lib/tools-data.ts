@@ -209,6 +209,41 @@ export const toolCategories: ToolCategory[] = [
     description: 'AI agents that can control computers',
     icon: 'MonitorPlay',
     color: 'bg-rose-600'
+  },
+  {
+    id: 'linux-distros',
+    name: 'Linux Distributions',
+    description: 'AI-optimized Linux distributions and environments',
+    icon: 'Linux',
+    color: 'bg-orange-600'
+  },
+  {
+    id: 'mobile-ai',
+    name: 'Mobile AI',
+    description: 'AI tools for mobile devices and Termux',
+    icon: 'Smartphone',
+    color: 'bg-purple-600'
+  },
+  {
+    id: 'osint-tools',
+    name: 'OSINT Toolkit',
+    description: 'Open Source Intelligence and deep web search tools',
+    icon: 'Search',
+    color: 'bg-slate-600'
+  },
+  {
+    id: 'agentic-workflows',
+    name: 'Agentic Workflows',
+    description: 'ReAct, System Architect, and autonomous workflows',
+    icon: 'Workflow',
+    color: 'bg-emerald-600'
+  },
+  {
+    id: 'secret-management',
+    name: 'Secret Management',
+    description: 'API key, secret, and credential management',
+    icon: 'Key',
+    color: 'bg-red-600'
   }
 ];
 
@@ -4867,6 +4902,1036 @@ export const aiTools: Tool[] = [
     tags: ['selenium', 'browser', 'automation'],
     repository: 'https://github.com/SeleniumHQ/selenium',
     installCommand: 'pip install selenium',
+    status: 'available'
+  },
+
+  // ==========================================
+  // CLOUD LLM & API ENGINES (10+)
+  // ==========================================
+  {
+    id: 'gemini-cli-cloud',
+    name: 'Gemini CLI',
+    slug: 'gemini-cli-cloud',
+    description: 'Google Gemini CLI for complex reasoning and scripting',
+    category: 'llm-inference',
+    icon: '💎',
+    tags: ['google', 'gemini', 'cloud', 'cli', 'reasoning'],
+    homepage: 'https://ai.google.dev/gemini-api/docs',
+    repository: 'https://github.com/google-gemini/gemini-cli',
+    installCommand: 'npm install -g @anthropic-ai/gemini-cli',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'apiKey', label: 'API Key', type: 'password', required: true, description: 'Google AI API Key' },
+      { key: 'model', label: 'Model', type: 'select', default: 'gemini-2.0-flash', options: [
+        { value: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
+        { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro' },
+        { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' }
+      ], description: 'Model to use for inference' }
+    ]
+  },
+  {
+    id: 'mistral-api',
+    name: 'Mistral AI API',
+    slug: 'mistral-api',
+    description: 'European cloud LLM with structured data processing',
+    category: 'llm-inference',
+    icon: '🌀',
+    tags: ['mistral', 'cloud', 'api', 'european'],
+    homepage: 'https://mistral.ai',
+    repository: 'https://github.com/mistralai/client-js',
+    installCommand: 'pip install mistralai',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'apiKey', label: 'API Key', type: 'password', required: true, description: 'Mistral API Key' },
+      { key: 'endpoint', label: 'Endpoint', type: 'text', default: 'https://api.mistral.ai', description: 'API endpoint' }
+    ]
+  },
+  {
+    id: 'claude-desktop',
+    name: 'Claude Desktop',
+    slug: 'claude-desktop',
+    description: 'Anthropic Claude desktop app with MCP support',
+    category: 'ai-desktop',
+    icon: '🎭',
+    tags: ['claude', 'anthropic', 'desktop', 'mcp'],
+    homepage: 'https://claude.ai/download',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'mcpEnabled', label: 'Enable MCP', type: 'boolean', default: true, description: 'Enable Model Context Protocol' },
+      { key: 'mcpServers', label: 'MCP Servers Config', type: 'text', description: 'Path to MCP servers config' }
+    ]
+  },
+  {
+    id: 'anthropic-api',
+    name: 'Anthropic API',
+    slug: 'anthropic-api',
+    description: 'Claude API for programmatic access',
+    category: 'llm-inference',
+    icon: '🎭',
+    tags: ['claude', 'anthropic', 'api', 'reasoning'],
+    homepage: 'https://docs.anthropic.com',
+    repository: 'https://github.com/anthropics/anthropic-sdk-python',
+    installCommand: 'pip install anthropic',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'openai-api',
+    name: 'OpenAI API',
+    slug: 'openai-api',
+    description: 'GPT-4, GPT-4o, and OpenAI models via API',
+    category: 'llm-inference',
+    icon: '🤖',
+    tags: ['openai', 'gpt', 'api', 'cloud'],
+    homepage: 'https://platform.openai.com',
+    repository: 'https://github.com/openai/openai-python',
+    installCommand: 'pip install openai',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'groq-api',
+    name: 'Groq API',
+    slug: 'groq-api',
+    description: 'Ultra-fast LLM inference with LPU acceleration',
+    category: 'llm-inference',
+    icon: '⚡',
+    tags: ['groq', 'fast', 'lpu', 'api'],
+    homepage: 'https://groq.com',
+    repository: 'https://github.com/groq/groq-python-sdk',
+    installCommand: 'pip install groq',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'cerebras-api',
+    name: 'Cerebras API',
+    slug: 'cerebras-api',
+    description: 'Fast AI inference on wafer-scale engine',
+    category: 'llm-inference',
+    icon: '🧠',
+    tags: ['cerebras', 'fast', 'wafer-scale'],
+    homepage: 'https://cerebras.ai',
+    installCommand: 'pip install cerebras',
+    status: 'available'
+  },
+  {
+    id: 'together-api',
+    name: 'Together AI',
+    slug: 'together-api',
+    description: 'Open-source model inference cloud',
+    category: 'llm-inference',
+    icon: '🤝',
+    tags: ['together', 'open-source', 'cloud'],
+    homepage: 'https://together.ai',
+    installCommand: 'pip install together',
+    status: 'available'
+  },
+  {
+    id: 'fireworks-api',
+    name: 'Fireworks AI',
+    slug: 'fireworks-api',
+    description: 'Fast serverless LLM inference',
+    category: 'llm-inference',
+    icon: '🎆',
+    tags: ['fireworks', 'fast', 'serverless'],
+    homepage: 'https://fireworks.ai',
+    installCommand: 'pip install fireworks-ai',
+    status: 'available'
+  },
+  {
+    id: 'deepseek-api',
+    name: 'DeepSeek API',
+    slug: 'deepseek-api',
+    description: 'DeepSeek reasoning models via API',
+    category: 'llm-inference',
+    icon: '🧠',
+    tags: ['deepseek', 'reasoning', 'api'],
+    homepage: 'https://platform.deepseek.com',
+    installCommand: 'pip install openai',
+    status: 'available'
+  },
+
+  // ==========================================
+  // LINUX DISTRIBUTIONS (AI-OPTIMIZED) (10+)
+  // ==========================================
+  {
+    id: 'cachyos',
+    name: 'CachyOS',
+    slug: 'cachyos',
+    description: 'Arch-based distro optimized for performance with AI tools',
+    category: 'linux-distros',
+    icon: '🚀',
+    tags: ['arch', 'performance', 'gaming', 'ai-optimized'],
+    homepage: 'https://cachyos.org',
+    repository: 'https://github.com/cachyos',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'desktop', label: 'Desktop Environment', type: 'select', default: 'kde', options: [
+        { value: 'kde', label: 'KDE Plasma' },
+        { value: 'gnome', label: 'GNOME' },
+        { value: 'hyprland', label: 'Hyprland' }
+      ]},
+      { key: 'kernel', label: 'Kernel', type: 'select', default: 'lts', options: [
+        { value: 'lts', label: 'Linux LTS' },
+        { value: 'zen', label: 'Linux Zen' },
+        { value: 'cachy', label: 'Cachy Kernel' }
+      ]}
+    ]
+  },
+  {
+    id: 'manjaro',
+    name: 'Manjaro Linux',
+    slug: 'manjaro',
+    description: 'User-friendly Arch-based distribution',
+    category: 'linux-distros',
+    icon: '🌲',
+    tags: ['arch', 'user-friendly', 'rolling'],
+    homepage: 'https://manjaro.org',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'biglinux',
+    name: 'BigLinux',
+    slug: 'biglinux',
+    description: 'Brazilian Arch-based distro with KDE focus',
+    category: 'linux-distros',
+    icon: '🐧',
+    tags: ['arch', 'kde', 'brazilian'],
+    homepage: 'https://biglinux.com.br',
+    status: 'available'
+  },
+  {
+    id: 'nobara',
+    name: 'Nobara Linux',
+    slug: 'nobara',
+    description: 'Fedora-based gaming and content creation distro',
+    category: 'linux-distros',
+    icon: '🎮',
+    tags: ['fedora', 'gaming', 'content-creation'],
+    homepage: 'https://nobaraproject.org',
+    repository: 'https://gitlab.com/nobara-linux',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'fedora-ai',
+    name: 'Fedora AI Spin',
+    slug: 'fedora-ai',
+    description: 'Fedora spin with pre-installed AI/ML tools',
+    category: 'linux-distros',
+    icon: '🎩',
+    tags: ['fedora', 'ai', 'ml', 'scientific'],
+    homepage: 'https://labs.fedoraproject.org',
+    status: 'available'
+  },
+  {
+    id: 'ubuntu-ai',
+    name: 'Ubuntu AI',
+    slug: 'ubuntu-ai',
+    description: 'Ubuntu with AI/ML development stack',
+    category: 'linux-distros',
+    icon: '🟠',
+    tags: ['ubuntu', 'ai', 'nvidia', 'cuda'],
+    homepage: 'https://ubuntu.com/ai',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'popos',
+    name: 'Pop!_OS',
+    slug: 'popos',
+    description: 'Ubuntu-based OS for creators and developers',
+    category: 'linux-distros',
+    icon: '🚀',
+    tags: ['ubuntu', 'nvidia', 'developers', 'cosmic'],
+    homepage: 'https://pop.system76.com',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nixos-ai',
+    name: 'NixOS AI',
+    slug: 'nixos-ai',
+    description: 'Reproducible AI/ML environments with Nix',
+    category: 'linux-distros',
+    icon: '❄️',
+    tags: ['nix', 'reproducible', 'declarative'],
+    homepage: 'https://nixos.org',
+    repository: 'https://github.com/nixos/nixpkgs',
+    status: 'available'
+  },
+  {
+    id: 'arch-ai',
+    name: 'Arch Linux AI',
+    slug: 'arch-ai',
+    description: 'Minimal Arch setup with AI development tools',
+    category: 'linux-distros',
+    icon: '🏔️',
+    tags: ['arch', 'minimal', 'rolling', 'customizable'],
+    homepage: 'https://archlinux.org',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'rhel-ai',
+    name: 'RHEL AI / InstructLab',
+    slug: 'rhel-ai',
+    description: 'Red Hat Enterprise Linux with AI capabilities',
+    category: 'linux-distros',
+    icon: '🎩',
+    tags: ['rhel', 'enterprise', 'ibm', 'instructlab'],
+    homepage: 'https://developers.redhat.com/products/rhel-ai',
+    isPopular: true,
+    status: 'available'
+  },
+
+  // ==========================================
+  // MOBILE AI & TERMUX (10+)
+  // ==========================================
+  {
+    id: 'termux',
+    name: 'Termux',
+    slug: 'termux',
+    description: 'Android terminal emulator with Linux environment',
+    category: 'mobile-ai',
+    icon: '📱',
+    tags: ['android', 'terminal', 'linux', 'mobile'],
+    homepage: 'https://termux.dev',
+    repository: 'https://github.com/termux/termux-app',
+    isPopular: true,
+    status: 'available',
+    installCommand: 'pkg install python nodejs',
+    configOptions: [
+      { key: 'rootAccess', label: 'Root Access', type: 'boolean', default: false, description: 'Enable root access via Magisk/KernelSU' },
+      { key: 'storageAccess', label: 'Storage Access', type: 'boolean', default: true, description: 'Grant storage permissions' }
+    ]
+  },
+  {
+    id: 'termux-api',
+    name: 'Termux:API',
+    slug: 'termux-api',
+    description: 'Access Android features from Termux',
+    category: 'mobile-ai',
+    icon: '🔌',
+    tags: ['android', 'api', 'mobile'],
+    repository: 'https://github.com/termux/termux-api',
+    installCommand: 'pkg install termux-api',
+    status: 'available'
+  },
+  {
+    id: 'magisk',
+    name: 'Magisk',
+    slug: 'magisk',
+    description: 'Systemless root for Android devices',
+    category: 'mobile-ai',
+    icon: '🎭',
+    tags: ['android', 'root', 'systemless'],
+    homepage: 'https://github.com/topjohnwu/Magisk',
+    repository: 'https://github.com/topjohnwu/Magisk',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'kernelsu',
+    name: 'KernelSU',
+    slug: 'kernelsu',
+    description: 'Kernel-based root solution for Android',
+    category: 'mobile-ai',
+    icon: '🔧',
+    tags: ['android', 'root', 'kernel'],
+    homepage: 'https://kernelsu.org',
+    repository: 'https://github.com/tiann/KernelSU',
+    status: 'available'
+  },
+  {
+    id: 'shizuku',
+    name: 'Shizuku',
+    slug: 'shizuku',
+    description: 'System API access without root',
+    category: 'mobile-ai',
+    icon: '🔮',
+    tags: ['android', 'api', 'adb'],
+    homepage: 'https://shizuku.rikka.app',
+    repository: 'https://github.com/RikkaApps/Shizuku',
+    status: 'available'
+  },
+  {
+    id: 'llama-termux',
+    name: 'LLaMA on Termux',
+    slug: 'llama-termux',
+    description: 'Run LLaMA models on Android via Termux',
+    category: 'mobile-ai',
+    icon: '🦙',
+    tags: ['android', 'llama', 'mobile', 'local'],
+    repository: 'https://github.com/ggerganov/llama.cpp',
+    status: 'available'
+  },
+  {
+    id: 'ollama-termux',
+    name: 'Ollama on Termux',
+    slug: 'ollama-termux',
+    description: 'Run Ollama on Android devices',
+    category: 'mobile-ai',
+    icon: '🦙',
+    tags: ['android', 'ollama', 'mobile'],
+    repository: 'https://github.com/ollama/ollama',
+    status: 'available'
+  },
+  {
+    id: 'mlc-llm-mobile',
+    name: 'MLC LLM Mobile',
+    slug: 'mlc-llm-mobile',
+    description: 'Run LLMs on mobile devices efficiently',
+    category: 'mobile-ai',
+    icon: '📱',
+    tags: ['mobile', 'llm', 'optimized'],
+    homepage: 'https://llm.mlc.ai',
+    repository: 'https://github.com/mlc-ai/mlc-llm',
+    status: 'available'
+  },
+  {
+    id: 'whisper-android',
+    name: 'Whisper Android',
+    slug: 'whisper-android',
+    description: 'Speech recognition on Android',
+    category: 'mobile-ai',
+    icon: '🎤',
+    tags: ['android', 'speech', 'asr', 'whisper'],
+    repository: 'https://github.com/nicholasren/whisper-android',
+    status: 'available'
+  },
+  {
+    id: 'mobile-comfyui',
+    name: 'ComfyUI Mobile',
+    slug: 'mobile-comfyui',
+    description: 'Stable Diffusion on mobile devices',
+    category: 'mobile-ai',
+    icon: '🎨',
+    tags: ['mobile', 'stable-diffusion', 'image'],
+    status: 'available'
+  },
+
+  // ==========================================
+  // MCP SERVERS & SKILLS (15+)
+  // ==========================================
+  {
+    id: 'mcp-server-bash',
+    name: 'MCP Server Bash',
+    slug: 'mcp-server-bash',
+    description: 'Execute shell commands via MCP - Terminal Skill',
+    category: 'mcp-servers',
+    icon: '💻',
+    tags: ['mcp', 'bash', 'terminal', 'shell'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/bash',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-bash',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'allowedCommands', label: 'Allowed Commands', type: 'text', description: 'Comma-separated list of allowed commands' },
+      { key: 'timeout', label: 'Command Timeout', type: 'number', default: 30000, description: 'Timeout in milliseconds' }
+    ]
+  },
+  {
+    id: 'mcp-server-filesystem',
+    name: 'MCP Server Filesystem',
+    slug: 'mcp-server-filesystem',
+    description: 'Read/write files via MCP - I/O Skill',
+    category: 'mcp-servers',
+    icon: '📁',
+    tags: ['mcp', 'filesystem', 'io', 'files'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-filesystem',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'allowedPaths', label: 'Allowed Paths', type: 'text', description: 'Comma-separated list of allowed paths' },
+      { key: 'readOnly', label: 'Read Only Mode', type: 'boolean', default: false, description: 'Disable write operations' }
+    ]
+  },
+  {
+    id: 'mcp-server-github-mcp',
+    name: 'MCP Server GitHub',
+    slug: 'mcp-server-github-mcp',
+    description: 'GitHub integration via MCP - VCS Skill',
+    category: 'mcp-servers',
+    icon: '🐙',
+    tags: ['mcp', 'github', 'vcs', 'git'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/github',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-github',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'githubToken', label: 'GitHub Token', type: 'password', required: true, description: 'GitHub Personal Access Token' },
+      { key: 'defaultOrg', label: 'Default Organization', type: 'text', description: 'Default GitHub organization' }
+    ]
+  },
+  {
+    id: 'mcp-server-memory-mcp',
+    name: 'MCP Server Memory',
+    slug: 'mcp-server-memory-mcp',
+    description: 'Persistent memory for AI agents via MCP',
+    category: 'mcp-servers',
+    icon: '🧠',
+    tags: ['mcp', 'memory', 'persistent', 'context'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/memory',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-memory',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'mcp-server-sequential',
+    name: 'MCP Server Sequential Thinking',
+    slug: 'mcp-server-sequential',
+    description: 'Step-by-step reasoning via MCP',
+    category: 'mcp-servers',
+    icon: '🔢',
+    tags: ['mcp', 'reasoning', 'step-by-step', 'thinking'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-sequential',
+    status: 'available'
+  },
+  {
+    id: 'mcp-server-brave-search',
+    name: 'MCP Server Brave Search',
+    slug: 'mcp-server-brave-search',
+    description: 'Web search via Brave Search API',
+    category: 'mcp-servers',
+    icon: '🔍',
+    tags: ['mcp', 'search', 'web', 'brave'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/brave_search',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-brave-search',
+    status: 'available',
+    configOptions: [
+      { key: 'braveApiKey', label: 'Brave API Key', type: 'password', required: true, description: 'Brave Search API Key' }
+    ]
+  },
+  {
+    id: 'mcp-server-puppeteer',
+    name: 'MCP Server Puppeteer',
+    slug: 'mcp-server-puppeteer',
+    description: 'Browser automation via MCP',
+    category: 'mcp-servers',
+    icon: '🌐',
+    tags: ['mcp', 'browser', 'puppeteer', 'automation'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-puppeteer',
+    status: 'available'
+  },
+  {
+    id: 'mcp-server-postgres',
+    name: 'MCP Server PostgreSQL',
+    slug: 'mcp-server-postgres',
+    description: 'PostgreSQL database access via MCP',
+    category: 'mcp-servers',
+    icon: '🐘',
+    tags: ['mcp', 'postgres', 'database', 'sql'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/postgres',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-postgres',
+    status: 'available',
+    configOptions: [
+      { key: 'connectionString', label: 'Connection String', type: 'password', required: true, description: 'PostgreSQL connection string' }
+    ]
+  },
+  {
+    id: 'mcp-server-slack',
+    name: 'MCP Server Slack',
+    slug: 'mcp-server-slack',
+    description: 'Slack integration via MCP',
+    category: 'mcp-servers',
+    icon: '💬',
+    tags: ['mcp', 'slack', 'messaging', 'communication'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/slack',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-slack',
+    status: 'available'
+  },
+  {
+    id: 'mcp-server-google-drive',
+    name: 'MCP Server Google Drive',
+    slug: 'mcp-server-google-drive',
+    description: 'Google Drive access via MCP',
+    category: 'mcp-servers',
+    icon: '📁',
+    tags: ['mcp', 'google', 'drive', 'storage'],
+    repository: 'https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive',
+    installCommand: 'npm install -g @anthropic-ai/mcp-server-gdrive',
+    status: 'available'
+  },
+
+  // ==========================================
+  // OSINT TOOLKIT (15+)
+  // ==========================================
+  {
+    id: 'osint-framework',
+    name: 'OSINT Framework',
+    slug: 'osint-framework',
+    description: 'Open Source Intelligence framework',
+    category: 'osint-tools',
+    icon: '🔍',
+    tags: ['osint', 'intelligence', 'framework', 'research'],
+    homepage: 'https://osintframework.com',
+    repository: 'https://github.com/lockfale/OSINT-Framework',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'maltego',
+    name: 'Maltego',
+    slug: 'maltego',
+    description: 'Interactive data mining and link analysis',
+    category: 'osint-tools',
+    icon: '🕸️',
+    tags: ['osint', 'graph', 'analysis', 'mining'],
+    homepage: 'https://maltego.com',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'sherlock',
+    name: 'Sherlock',
+    slug: 'sherlock',
+    description: 'Hunt down social media accounts by username',
+    category: 'osint-tools',
+    icon: '🔎',
+    tags: ['osint', 'social-media', 'username', 'search'],
+    repository: 'https://github.com/sherlock-project/sherlock',
+    installCommand: 'pip install sherlock-project',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'theharvester',
+    name: 'theHarvester',
+    slug: 'theharvester',
+    description: 'E-mail, subdomain and people names harvester',
+    category: 'osint-tools',
+    icon: '📧',
+    tags: ['osint', 'email', 'subdomain', 'recon'],
+    repository: 'https://github.com/laramies/theHarvester',
+    installCommand: 'pip install theHarvester',
+    status: 'available'
+  },
+  {
+    id: 'recon-ng',
+    name: 'Recon-ng',
+    slug: 'recon-ng',
+    description: 'Web Reconnaissance framework',
+    category: 'osint-tools',
+    icon: '🎯',
+    tags: ['osint', 'recon', 'framework'],
+    repository: 'https://github.com/lanmaster53/recon-ng',
+    installCommand: 'pip install recon-ng',
+    status: 'available'
+  },
+  {
+    id: 'spiderfoot',
+    name: 'SpiderFoot',
+    slug: 'spiderfoot',
+    description: 'OSINT automation tool',
+    category: 'osint-tools',
+    icon: '🕷️',
+    tags: ['osint', 'automation', 'recon'],
+    homepage: 'https://www.spiderfoot.net',
+    repository: 'https://github.com/smicallef/spiderfoot',
+    installCommand: 'pip install spiderfoot',
+    status: 'available'
+  },
+  {
+    id: 'shodan-cli',
+    name: 'Shodan CLI',
+    slug: 'shodan-cli',
+    description: 'Search engine for Internet-connected devices',
+    category: 'osint-tools',
+    icon: '🔌',
+    tags: ['osint', 'iot', 'devices', 'security'],
+    homepage: 'https://shodan.io',
+    installCommand: 'pip install shodan',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'shodanApiKey', label: 'Shodan API Key', type: 'password', required: true, description: 'Shodan API Key' }
+    ]
+  },
+  {
+    id: 'censys',
+    name: 'Censys',
+    slug: 'censys',
+    description: 'Search engine for internet-wide scan data',
+    category: 'osint-tools',
+    icon: '🌐',
+    tags: ['osint', 'scanning', 'security'],
+    homepage: 'https://censys.io',
+    installCommand: 'pip install censys',
+    status: 'available'
+  },
+  {
+    id: 'dnstwist',
+    name: 'DNStwist',
+    slug: 'dnstwist',
+    description: 'Domain name permutation engine for typosquatting',
+    category: 'osint-tools',
+    icon: '🔀',
+    tags: ['osint', 'dns', 'typosquatting', 'security'],
+    repository: 'https://github.com/elceef/dnstwist',
+    installCommand: 'pip install dnstwist',
+    status: 'available'
+  },
+  {
+    id: 'amass',
+    name: 'Amass',
+    slug: 'amass',
+    description: 'In-depth attack surface mapping and asset discovery',
+    category: 'osint-tools',
+    icon: '🗺️',
+    tags: ['osint', 'subdomain', 'asset-discovery'],
+    repository: 'https://github.com/owasp-amass/amass',
+    installCommand: 'go install -v github.com/owasp-amass/amass/v4/...@master',
+    status: 'available'
+  },
+  {
+    id: 'searxng-osint',
+    name: 'SearXNG',
+    slug: 'searxng-osint',
+    description: 'Privacy-respecting metasearch engine',
+    category: 'osint-tools',
+    icon: '🔍',
+    tags: ['search', 'privacy', 'metasearch'],
+    homepage: 'https://searxng.org',
+    repository: 'https://github.com/searxng/searxng',
+    dockerImage: 'searxng/searxng:latest',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'tavily-osint',
+    name: 'Tavily Search',
+    slug: 'tavily-osint',
+    description: 'AI-optimized search API for agents',
+    category: 'osint-tools',
+    icon: '🔍',
+    tags: ['search', 'ai', 'api', 'agents'],
+    homepage: 'https://tavily.com',
+    installCommand: 'pip install tavily-python',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'exa-search-osint',
+    name: 'Exa Search',
+    slug: 'exa-search-osint',
+    description: 'Neural search engine for AI applications',
+    category: 'osint-tools',
+    icon: '🧠',
+    tags: ['search', 'neural', 'ai', 'api'],
+    homepage: 'https://exa.ai',
+    installCommand: 'pip install exa-py',
+    status: 'available'
+  },
+  {
+    id: 'jina-reader-osint',
+    name: 'Jina Reader',
+    slug: 'jina-reader-osint',
+    description: 'Extract and parse web content for AI',
+    category: 'osint-tools',
+    icon: '📖',
+    tags: ['web', 'parser', 'reader', 'ai'],
+    homepage: 'https://jina.ai/reader',
+    installCommand: 'pip install jina',
+    status: 'available'
+  },
+
+  // ==========================================
+  // AGENTIC WORKFLOWS (10+)
+  // ==========================================
+  {
+    id: 'react-workflow',
+    name: 'ReAct Workflow Engine',
+    slug: 'react-workflow',
+    description: 'Reason + Act coding loops for autonomous development',
+    category: 'agentic-workflows',
+    icon: '🔄',
+    tags: ['react', 'reasoning', 'autonomous', 'workflow'],
+    repository: 'https://github.com/langchain-ai/langchain',
+    installCommand: 'pip install langchain langchain-core',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'maxIterations', label: 'Max Iterations', type: 'number', default: 10, description: 'Maximum reasoning iterations' },
+      { key: 'verbose', label: 'Verbose Mode', type: 'boolean', default: true, description: 'Show reasoning steps' }
+    ]
+  },
+  {
+    id: 'system-architect',
+    name: 'System Architect Provisioning',
+    slug: 'system-architect',
+    description: 'Autonomous development environment setup',
+    category: 'agentic-workflows',
+    icon: '🏗️',
+    tags: ['provisioning', 'infrastructure', 'automation', 'setup'],
+    status: 'available',
+    configOptions: [
+      { key: 'targetOS', label: 'Target OS', type: 'select', default: 'linux', options: [
+        { value: 'linux', label: 'Linux' },
+        { value: 'windows', label: 'Windows' },
+        { value: 'macos', label: 'macOS' }
+      ]},
+      { key: 'environment', label: 'Environment Type', type: 'select', default: 'development', options: [
+        { value: 'development', label: 'Development' },
+        { value: 'production', label: 'Production' },
+        { value: 'testing', label: 'Testing' }
+      ]}
+    ]
+  },
+  {
+    id: 'langgraph-workflows',
+    name: 'LangGraph Workflows',
+    slug: 'langgraph-workflows',
+    description: 'Stateful multi-actor agent workflows',
+    category: 'agentic-workflows',
+    icon: '📊',
+    tags: ['langgraph', 'stateful', 'multi-agent', 'workflow'],
+    homepage: 'https://langchain-ai.github.io/langgraph',
+    repository: 'https://github.com/langchain-ai/langgraph',
+    installCommand: 'pip install langgraph',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'crewai-workflows',
+    name: 'CrewAI Workflows',
+    slug: 'crewai-workflows',
+    description: 'Multi-agent orchestration framework',
+    category: 'agentic-workflows',
+    icon: '👥',
+    tags: ['crewai', 'multi-agent', 'orchestration', 'collaboration'],
+    homepage: 'https://crewai.com',
+    repository: 'https://github.com/joaomdmoura/crewAI',
+    installCommand: 'pip install crewai',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'autogen-workflows',
+    name: 'AutoGen Workflows',
+    slug: 'autogen-workflows',
+    description: 'Multi-agent conversation framework by Microsoft',
+    category: 'agentic-workflows',
+    icon: '🤖',
+    tags: ['autogen', 'microsoft', 'multi-agent', 'conversation'],
+    repository: 'https://github.com/microsoft/autogen',
+    installCommand: 'pip install pyautogen',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'haystack-agents',
+    name: 'Haystack Agents',
+    slug: 'haystack-agents',
+    description: 'NLP pipeline and agent framework',
+    category: 'agentic-workflows',
+    icon: '🌾',
+    tags: ['haystack', 'nlp', 'pipeline', 'agents'],
+    homepage: 'https://haystack.deepset.ai',
+    repository: 'https://github.com/deepset-ai/haystack',
+    installCommand: 'pip install haystack-ai',
+    status: 'available'
+  },
+  {
+    id: 'llamaindex-agents',
+    name: 'LlamaIndex Agents',
+    slug: 'llamaindex-agents',
+    description: 'Data framework for LLM applications',
+    category: 'agentic-workflows',
+    icon: '🦙',
+    tags: ['llamaindex', 'rag', 'data', 'agents'],
+    homepage: 'https://docs.llamaindex.ai',
+    repository: 'https://github.com/run-llama/llama_index',
+    installCommand: 'pip install llama-index',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'smolagents',
+    name: 'SmolAgents',
+    slug: 'smolagents',
+    description: 'Lightweight agent framework by Hugging Face',
+    category: 'agentic-workflows',
+    icon: '🤗',
+    tags: ['smolagents', 'huggingface', 'lightweight', 'agents'],
+    repository: 'https://github.com/huggingface/smolagents',
+    installCommand: 'pip install smolagents',
+    status: 'available'
+  },
+  {
+    id: 'agentops-workflow',
+    name: 'AgentOps',
+    slug: 'agentops-workflow',
+    description: 'Observability and monitoring for AI agents',
+    category: 'agentic-workflows',
+    icon: '📊',
+    tags: ['monitoring', 'observability', 'agents', 'debugging'],
+    homepage: 'https://agentops.ai',
+    repository: 'https://github.com/AgentOps-AI/agentops',
+    installCommand: 'pip install agentops',
+    status: 'available'
+  },
+  {
+    id: 'phidata-agents',
+    name: 'PhiData Agents',
+    slug: 'phidata-agents',
+    description: 'Build AI agents with memory and tools',
+    category: 'agentic-workflows',
+    icon: '🧠',
+    tags: ['phidata', 'memory', 'tools', 'agents'],
+    homepage: 'https://phidata.com',
+    repository: 'https://github.com/phidatahq/phidata',
+    installCommand: 'pip install phidata',
+    status: 'available'
+  },
+
+  // ==========================================
+  // SECRET MANAGEMENT (10+)
+  // ==========================================
+  {
+    id: 'hashicorp-vault',
+    name: 'HashiCorp Vault',
+    slug: 'hashicorp-vault',
+    description: 'Secrets management and encryption',
+    category: 'secret-management',
+    icon: '🔐',
+    tags: ['vault', 'secrets', 'encryption', 'hashicorp'],
+    homepage: 'https://vaultproject.io',
+    repository: 'https://github.com/hashicorp/vault',
+    dockerImage: 'hashicorp/vault:latest',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'storageBackend', label: 'Storage Backend', type: 'select', default: 'file', options: [
+        { value: 'file', label: 'File System' },
+        { value: 'consul', label: 'Consul' },
+        { value: 'postgres', label: 'PostgreSQL' }
+      ]},
+      { key: 'autoUnseal', label: 'Auto Unseal', type: 'boolean', default: false, description: 'Enable auto-unseal' }
+    ]
+  },
+  {
+    id: 'infisical',
+    name: 'Infisical',
+    slug: 'infisical',
+    description: 'Open-source secrets management platform',
+    category: 'secret-management',
+    icon: '🔑',
+    tags: ['infisical', 'secrets', 'open-source', 'developer'],
+    homepage: 'https://infisical.com',
+    repository: 'https://github.com/Infisical/infisical',
+    installCommand: 'pip install infisical',
+    dockerImage: 'infisical/infisical:latest',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'doppler',
+    name: 'Doppler',
+    slug: 'doppler',
+    description: 'Secrets management for developers',
+    category: 'secret-management',
+    icon: '🔊',
+    tags: ['doppler', 'secrets', 'env', 'developer'],
+    homepage: 'https://doppler.com',
+    installCommand: 'pip install doppler',
+    status: 'available'
+  },
+  {
+    id: '1password-cli',
+    name: '1Password CLI',
+    slug: '1password-cli',
+    description: 'Command-line interface for 1Password',
+    category: 'secret-management',
+    icon: '🔐',
+    tags: ['1password', 'secrets', 'password-manager', 'cli'],
+    homepage: 'https://developer.1password.com/docs/cli',
+    installCommand: 'brew install 1password-cli',
+    status: 'available'
+  },
+  {
+    id: 'bitwarden-cli',
+    name: 'Bitwarden CLI',
+    slug: 'bitwarden-cli',
+    description: 'Open-source password manager CLI',
+    category: 'secret-management',
+    icon: '🛡️',
+    tags: ['bitwarden', 'secrets', 'password-manager', 'cli'],
+    homepage: 'https://bitwarden.com',
+    repository: 'https://github.com/bitwarden/cli',
+    installCommand: 'npm install -g @bitwarden/cli',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'sops-secrets',
+    name: 'SOPS',
+    slug: 'sops-secrets',
+    description: 'Secrets OPerationS for encrypting files',
+    category: 'secret-management',
+    icon: '🔒',
+    tags: ['sops', 'encryption', 'gitops', 'mozilla'],
+    repository: 'https://github.com/getsops/sops',
+    installCommand: 'pip install sops',
+    status: 'available'
+  },
+  {
+    id: 'age-encryption',
+    name: 'Age Encryption',
+    slug: 'age-encryption',
+    description: 'Simple, modern file encryption tool',
+    category: 'secret-management',
+    icon: '🎂',
+    tags: ['age', 'encryption', 'simple', 'modern'],
+    repository: 'https://github.com/FiloSottile/age',
+    installCommand: 'brew install age',
+    status: 'available'
+  },
+  {
+    id: 'gnupg-secrets',
+    name: 'GnuPG',
+    slug: 'gnupg-secrets',
+    description: 'GNU Privacy Guard for encryption',
+    category: 'secret-management',
+    icon: '🔏',
+    tags: ['gpg', 'encryption', 'pgp', 'signing'],
+    homepage: 'https://gnupg.org',
+    installCommand: 'sudo dnf install gnupg2',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'keychain',
+    name: 'Keychain',
+    slug: 'keychain',
+    description: 'SSH/GPG agent management',
+    category: 'secret-management',
+    icon: '🗝️',
+    tags: ['ssh', 'gpg', 'agent', 'keychain'],
+    repository: 'https://github.com/funtoo/keychain',
+    installCommand: 'sudo dnf install keychain',
+    status: 'available'
+  },
+  {
+    id: 'pass',
+    name: 'Pass',
+    slug: 'pass',
+    description: 'Standard Unix password manager',
+    category: 'secret-management',
+    icon: '🔐',
+    tags: ['pass', 'password', 'unix', 'gpg'],
+    homepage: 'https://passwordstore.org',
+    repository: 'https://git.zx2c4.com/password-store',
+    installCommand: 'sudo dnf install pass',
     status: 'available'
   }
 ];
