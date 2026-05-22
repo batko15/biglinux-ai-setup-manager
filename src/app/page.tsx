@@ -22,7 +22,8 @@ import {
   Container, Shield, Image as ImageIcon, Terminal, Search, Check, Download, 
   Settings, Play, Trash2, Info, ExternalLink, Copy, CheckCircle2,
   Zap, Star, Filter, ChevronRight, Package, Server, HardDrive,
-  Cog, FileCode, Box, LayoutGrid, List, RefreshCw, Clock
+  Cog, FileCode, Box, LayoutGrid, List, RefreshCw, Clock, Mic, BarChart, 
+  MessageSquare, Music, Headphones, PenTool, Sparkles
 } from 'lucide-react';
 import { toolCategories, aiTools, getToolsByCategory, getPopularTools, type Tool, type ToolCategory, type ConfigOption } from '@/lib/tools-data';
 
@@ -130,6 +131,11 @@ export default function RHELAISetupManager() {
       'Shield': <Shield className="h-5 w-5" />,
       'Image': <ImageIcon className="h-5 w-5" />,
       'Terminal': <Terminal className="h-5 w-5" />,
+      'Mic': <Mic className="h-5 w-5" />,
+      'BarChart': <BarChart className="h-5 w-5" />,
+      'FileCode': <FileCode className="h-5 w-5" />,
+      'RefreshCw': <RefreshCw className="h-5 w-5" />,
+      'MessageSquare': <MessageSquare className="h-5 w-5" />,
     };
     return icons[iconName] || <Package className="h-5 w-5" />;
   };
