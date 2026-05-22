@@ -1,182 +1,277 @@
-# BigLinux AI Setup Manager
+# 🐧 BigLinux AI Setup Manager
 
-Eine umfassende grafische Oberfläche zur Verwaltung und Installation von KI/ML-Tools für BigLinux und Manjaro.
+<div align="center">
+
+![BigLinux AI Setup Manager](https://img.shields.io/badge/BigLinux-AI%20Setup%20Manager-7C3AED?style=for-the-badge&logo=linux&logoColor=white)
+![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Linux-orange?style=for-the-badge)
+
+**Desktop-App für KI/ML Tools Management auf BigLinux und Manjaro**
+
+[📥 Download](#-installation) • [📖 Dokumentation](#-features) • [🤝 Mitwirken](#-beitragen) • [📞 Support](#-support)
+
+</div>
+
+---
 
 ## 🚀 Features
 
-- **600+ AI/ML Tools** - LLM Inference, lokale Modelle, Vektor-Datenbanken, Frameworks
-- **33 Kategorien** - Organisierte Tool-Sammlung für einfache Navigation
-- **Grafische Oberfläche** - Intuitive GUI zur Auswahl und Konfiguration von Tools
-- **Installations-Skripte** - Automatisch generierte Bash-Skripte für Arch-basierte Systeme
-- **Docker Compose** - Container-basierte Deployment-Konfigurationen
-- **Konfiguration** - Individuelle Einstellungen pro Tool
+### 📦 Umfassende Toolsammlung
+- **635+ AI/ML Tools** - Die größte Sammlung für Linux
+- **33 Kategorien** - Perfekt organisiert für einfache Navigation
+- **RTX 4070 optimiert** - Spezielle Konfigurationen für 12GB VRAM
 
-## 💻 System-Unterstützung
+### 🖥️ Desktop-App
+- **Native Linux-App** - Electron-basiert für beste Performance
+- **System-Tray Integration** - Schnellzugriff aus der Taskleiste
+- **Offline-fähig** - Funktioniert ohne Internetverbindung
 
-Optimiert für:
-- **BigLinux** - Brazilian Arch-based Distribution
-- **Manjaro** - User-friendly Arch Distribution
-- **Arch Linux** - Rolling Release
-- **CachyOS** - Performance-optimized Arch
+### 🛠️ Installation
+- **Automatische Skripte** - One-Click Installation
+- **Docker Compose** - Container-basierte Deployment-Option
+- **Pacman-Support** - Native Arch/Manjaro Integration
 
-## 🎯 Hardware-Optimierung
+---
 
-Standard-Konfiguration für:
-- **CPU**: Intel i5-12400F (Alder Lake, 6C/12T)
-- **GPU**: NVIDIA RTX 4070 (12GB VRAM)
-- **RAM**: 32GB + 47GB ZRAM Swap
+## 💻 Systemanforderungen
+
+### Unterstützte Systeme
+| Distribution | Status |
+|-------------|--------|
+| **BigLinux** | ✅ Primär unterstützt |
+| **Manjaro** | ✅ Vollständig unterstützt |
+| **Arch Linux** | ✅ Kompatibel |
+| **CachyOS** | ✅ Kompatibel |
+| **EndeavourOS** | ✅ Kompatibel |
+
+### Hardware-Empfehlung
+| Komponente | Minimum | Empfohlen |
+|------------|---------|-----------|
+| **CPU** | 4 Kerne | 6+ Kerne (i5-12400F) |
+| **RAM** | 16 GB | 32 GB |
+| **GPU** | Optional | RTX 4070 (12GB VRAM) |
+| **Storage** | 100 GB SSD | 500 GB NVMe |
+
+---
+
+## 📥 Installation
+
+### Option 1: Desktop-App (Empfohlen)
+
+```bash
+# Download von GitHub Releases
+wget https://github.com/batko15/biglinux-ai-setup-manager/releases/latest/download/biglinux-ai-setup-manager.AppImage
+
+# Ausführbar machen
+chmod +x biglinux-ai-setup-manager.AppImage
+
+# Starten
+./biglinux-ai-setup-manager.AppImage
+```
+
+### Option 2: Pacman (Arch/Manjaro)
+
+```bash
+# Download und Installation
+wget https://github.com/batko15/biglinux-ai-setup-manager/releases/latest/download/biglinux-ai-setup-manager.pkg.tar.zst
+sudo pacman -U biglinux-ai-setup-manager.pkg.tar.zst
+```
+
+### Option 3: Aus Source erstellen
+
+```bash
+# Repository klonen
+git clone https://github.com/batko15/biglinux-ai-setup-manager.git
+cd biglinux-ai-setup-manager
+
+# Abhängigkeiten installieren
+sudo pacman -S --needed bun nodejs npm
+
+# Entwicklungsversion starten
+bun install
+bun run dev
+
+# Desktop-App erstellen
+bun run electron:build:linux
+```
+
+---
 
 ## 📦 Tool-Kategorien
 
-### KI-Inferenz
-- **Ollama** - Lokale LLM-Ausführung
-- **vLLM** - Hochleistungs-Inferenz-Server
-- **LocalAI** - OpenAI-kompatible API
-- **llama.cpp** - C/C++ Inferenz
-- **LM Studio** - Desktop-GUI für LLMs
-- **Jan** - Offline ChatGPT-Alternative
+### 🧠 KI-Inferenz (20+ Tools)
+| Tool | Beschreibung | VRAM |
+|------|--------------|------|
+| **Ollama** | Lokale LLM-Ausführung | 4-12GB |
+| **vLLM** | Hochleistungs-Inferenz | 8-12GB |
+| **LocalAI** | OpenAI-kompatible API | 4-8GB |
+| **llama.cpp** | C/C++ Inferenz | 2-8GB |
 
-### Lokale Modelle
+### 🦙 Lokale Modelle (25+)
 - **Llama 3.1/3.2** - Meta's Open-Source LLM
 - **Mistral 7B** - Effizientes 7B-Modell
 - **DeepSeek R1/V3** - Reasoning-fokussiert
-- **Qwen 2.5 Coder** - Multilingual
-- **Phi-3/Phi-4** - Microsoft's kompaktes Modell
-- **Gemma 2** - Google's Open-Source Modelle
+- **Qwen 2.5 Coder** - Multilingual Coding
+- **Phi-3/Phi-4** - Microsoft's kompakte Modelle
 
-### Vector Databases
-- **Milvus** - Enterprise Vektor-Datenbank
-- **Qdrant** - Hochperformante Ähnlichkeitssuche
-- **ChromaDB** - AI-native Embedding-DB
-- **FAISS** - Facebook AI Similarity Search
+### 🗄️ Vector Databases (15+)
+- **Milvus** - Enterprise Vektor-DB
+- **Qdrant** - Hochperformante Suche
+- **ChromaDB** - AI-native Embeddings
+- **FAISS** - Facebook AI Search
 
-### AI Desktop Apps
-- **Open WebUI** - ChatGPT-ähnliche Weboberfläche
-- **AnythingLLM** - All-in-One mit RAG
-- **Continue** - VS Code/JetBrains Extension
-- **Aider** - Terminal-basiertes Pair Programming
+### 🤖 RAG & Agents (20+)
+- **LangChain** - LLM Framework
+- **LlamaIndex** - Data Framework
+- **CrewAI** - Multi-Agent Orchestration
+- **AutoGen** - Microsoft Agents
 
-### BigLinux/Manjaro Tools
-- **Pacman** - Package Manager
-- **Yay/Paru** - AUR Helper
-- **Pamac** - GUI Package Manager
-- **Timeshift** - System Restore
-- **MHWD** - Hardware Detection
+---
 
-## 🛠️ Installation
+## 🎯 RTX 4070 Empfohlene Modelle
 
-### Voraussetzungen
-- BigLinux, Manjaro oder Arch-basierte Distribution
-- Root/Sudo-Zugriff
-- Internetverbindung
+| Modell | Parameter | VRAM | Use Case |
+|--------|-----------|------|----------|
+| **Llama 3.1 8B** | 8B | ~5GB | Allgemein |
+| **Mistral 7B** | 7B | ~4GB | Effizient |
+| **DeepSeek R1 8B** | 8B | ~5GB | Reasoning |
+| **Qwen 2.5 Coder 7B** | 7B | ~4GB | Coding |
+| **Codestral 22B** | 22B | ~12GB | Coding (Maximum) |
+| **LLaVA 1.6 7B** | 7B | ~6GB | Vision |
 
-### Schnellstart
+---
 
-1. Repository klonen:
-```bash
-git clone https://github.com/batko15/rhel-ai-setup-manager.git
-cd rhel-ai-setup-manager
+## 🛠️ Docker Services
+
+Die App enthält vorkonfigurierte Docker-Compose Setups:
+
+```yaml
+Services:
+  ├── Ollama (LLM Inference)
+  ├── Open WebUI (Chat Interface)
+  ├── Qdrant (Vector DB)
+  ├── ChromaDB (Embeddings)
+  ├── LocalAI (OpenAI API)
+  ├── Whisper (Speech-to-Text)
+  ├── Stable Diffusion (Image Gen)
+  ├── LangFlow (Visual Builder)
+  ├── Flowise (Visual Builder)
+  ├── Text Gen WebUI (oobabooga)
+  ├── Jupyter (Notebooks)
+  ├── Redis (Cache)
+  └── Nginx (Proxy)
 ```
 
-2. Abhängigkeiten installieren:
-```bash
-sudo pacman -S --needed bun nodejs npm
-```
-
-3. GUI starten:
-```bash
-bun run dev
-```
-
-4. Browser öffnen: `http://localhost:3000`
-
-## 📋 Verwendung
-
-1. **Tools durchsuchen** - Nutzen Sie die Kategorien oder die Suche
-2. **Tools auswählen** - Klicken Sie auf Tools zur Auswahl
-3. **Konfiguration** - Passen Sie Einstellungen in den Details an
-4. **Skript generieren** - Erstellen Sie Installations-Skripte
-5. **Ausführen** - Führen Sie das Skript auf Ihrem System aus
-
-## 🎨 RTX 4070 Empfohlene Modelle
-
-| Modell | VRAM | Quantisierung | Use Case |
-|--------|------|---------------|----------|
-| Llama 3.1 8B | 6GB | Q4_K_M | General |
-| Mistral 7B | 5GB | Q4_K_M | Efficient |
-| DeepSeek R1 14B | 10GB | Q4_K_M | Reasoning |
-| Qwen 2.5 14B | 10GB | Q4_K_M | Coding |
-| Gemma 2 9B | 7GB | Q4_K_M | General |
-| Phi-4 14B | 10GB | Q4_K_M | Compact |
+---
 
 ## 📁 Projektstruktur
 
 ```
-configs/
-├── ollama/          # Ollama Konfiguration
-├── mcp/             # MCP Server Konfiguration
-├── system/          # System-Parameter
-├── prometheus/      # Monitoring
-└── grafana/         # Dashboards
-
-scripts/
-├── setup-rtx4070.sh # RTX 4070 Setup
-└── install-*.sh     # Installationsskripte
+biglinux-ai-setup-manager/
+├── electron/                 # Desktop-App
+│   ├── main.js              # Electron Main Process
+│   ├── preload.js           # Preload Scripts
+│   └── assets/              # Icons & Bilder
+├── src/
+│   ├── app/                 # Next.js App
+│   ├── components/          # UI Komponenten
+│   └── lib/                 # Daten & Utils
+├── configs/
+│   ├── mcp/                 # MCP Server
+│   ├── ollama/              # Ollama Configs
+│   └── system/              # System Configs
+├── scripts/
+│   └── setup-rtx4070.sh     # Setup Script
+├── docker-compose.yml       # Docker Stack
+└── prisma/                  # Database Schema
 ```
 
-## 🖥️ Systemanforderungen
+---
 
-### Minimum
-- CPU: 4 Kerne
-- RAM: 16 GB
-- Disk: 100 GB SSD
+## 🚀 Schnellstart
 
-### Empfohlen (mit GPU)
-- CPU: 6+ Kerne
-- RAM: 32 GB
-- GPU: NVIDIA RTX 4070 oder besser
-- Disk: 500 GB NVMe SSD
+### 1. Desktop-App starten
+```bash
+./biglinux-ai-setup-manager.AppImage
+```
 
-## 🔒 Sicherheit
+### 2. Tools auswählen
+- Klicken Sie auf Tools zur Auswahl
+- Nutzen Sie die Kategorien zur Navigation
+- Durchsuchen Sie mit der Suche
 
-- Firewalld Konfiguration
-- SELinux/AppArmor Support
-- Rootless Podman-Unterstützung
-- Secrets-Verschlüsselung
+### 3. Installation generieren
+- Klicken Sie auf "Skript generieren"
+- Oder "Docker Compose generieren"
 
-## 📊 Monitoring
+### 4. Ausführen
+```bash
+# Bash Script
+chmod +x install.sh
+./install.sh
 
-- GPU-Nutzung mit nvtop
-- Prometheus Metrics
-- Grafana Dashboards
-- System-Monitoring
+# Oder Docker
+docker-compose up -d
+```
+
+---
+
+## 🔧 MCP Server
+
+Vorkonfigurierte Model Context Protocol Server:
+
+| Server | Beschreibung | Status |
+|--------|--------------|--------|
+| **filesystem** | Dateisystem-Zugriff | ✅ |
+| **github** | GitHub API | ✅ |
+| **memory** | Persistenter Speicher | ✅ |
+| **sequential-thinking** | Reasoning | ✅ |
+
+---
 
 ## 🤝 Beitragen
 
-1. Fork erstellen
-2. Feature-Branch: `git checkout -b feature/neues-feature`
-3. Commits: `git commit -m 'Neues Feature hinzugefügt'`
-4. Push: `git push origin feature/neues-feature`
-5. Pull Request erstellen
+Beiträge sind willkommen! So können Sie helfen:
+
+1. **Fork erstellen**
+2. **Feature Branch**: `git checkout -b feature/neues-feature`
+3. **Commits**: `git commit -m 'Feature hinzugefügt'`
+4. **Push**: `git push origin feature/neues-feature`
+5. **Pull Request erstellen**
+
+---
 
 ## 📄 Lizenz
 
 MIT License - siehe [LICENSE](LICENSE)
 
+---
+
 ## 🙏 Danksagung
 
-- [Ollama](https://ollama.ai)
-- [vLLM](https://vllm.ai)
-- [Hugging Face](https://huggingface.co)
-- [BigLinux](https://biglinux.com.br)
-- [Manjaro](https://manjaro.org)
-- [NVIDIA](https://nvidia.com)
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/batko15/rhel-ai-setup-manager/issues)
-- **Repository**: https://github.com/batko15/rhel-ai-setup-manager
+- [BigLinux](https://biglinux.com.br) - Brazilian Linux Distribution
+- [Manjaro](https://manjaro.org) - User-friendly Arch
+- [Ollama](https://ollama.ai) - Local LLM Runtime
+- [vLLM](https://vllm.ai) - High-performance Inference
+- [Hugging Face](https://huggingface.co) - Model Hub
+- [NVIDIA](https://nvidia.com) - CUDA & GPU Tools
 
 ---
 
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/batko15/biglinux-ai-setup-manager/issues)
+- **Repository**: https://github.com/batko15/biglinux-ai-setup-manager
+- **Releases**: https://github.com/batko15/biglinux-ai-setup-manager/releases
+
+---
+
+<div align="center">
+
 **Made with ❤️ for the BigLinux AI Community**
+
+![BigLinux](https://img.shields.io/badge/Powered%20by-BigLinux-green?style=flat-square)
+![AI](https://img.shields.io/badge/AI-First-purple?style=flat-square)
+
+</div>

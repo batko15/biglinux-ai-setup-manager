@@ -1,7 +1,16 @@
 {
-  "name": "nextjs_tailwind_shadcn_ts",
-  "version": "0.2.0",
-  "private": true,
+  "name": "biglinux-ai-setup-manager",
+  "version": "1.0.0",
+  "description": "BigLinux AI Setup Manager - Desktop App für KI/ML Tools Management",
+  "author": "BigLinux AI Community",
+  "license": "MIT",
+  "private": false,
+  "homepage": "https://github.com/batko15/biglinux-ai-setup-manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/batko15/biglinux-ai-setup-manager.git"
+  },
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
     "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
@@ -10,7 +19,14 @@
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "electron:dev": "concurrently \"bun run dev\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .\"",
+    "electron:build": "bun run build && electron-builder",
+    "electron:build:linux": "bun run build && electron-builder --linux",
+    "electron:build:deb": "bun run build && electron-builder --linux deb",
+    "electron:build:appimage": "bun run build && electron-builder --linux AppImage",
+    "electron:build:pacman": "bun run build && electron-builder --linux pacman",
+    "electron:preview": "bun run build && cross-env NODE_ENV=production electron ."
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -85,10 +101,94 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "bun-types": "^1.3.4",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1",
     "eslint": "^9",
     "eslint-config-next": "^16.1.1",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.5",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^9.0.10"
+  },
+  "build": {
+    "appId": "com.biglinux.ai-setup-manager",
+    "productName": "BigLinux AI Setup Manager",
+    "copyright": "Copyright © 2025 BigLinux AI Community",
+    "directories": {
+      "output": "dist",
+      "buildResources": "electron/assets"
+    },
+    "files": [
+      "electron/**/*",
+      ".next/standalone/**/*",
+      ".next/static/**/*",
+      "public/**/*",
+      "db/**/*",
+      "configs/**/*",
+      "scripts/**/*",
+      "prisma/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "db",
+        "to": "db"
+      },
+      {
+        "from": "configs",
+        "to": "configs"
+      },
+      {
+        "from": "scripts",
+        "to": "scripts"
+      }
+    ],
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        },
+        {
+          "target": "pacman",
+          "arch": ["x64"]
+        },
+        {
+          "target": "tar.gz",
+          "arch": ["x64"]
+        }
+      ],
+      "category": "Development",
+      "icon": "electron/assets/icon.png",
+      "desktop": {
+        "Name": "BigLinux AI Setup Manager",
+        "Comment": "KI/ML Tools Management für BigLinux",
+        "Categories": "Development;System;Settings",
+        "Keywords": "ai;ml;llm;biglinux;manjaro;arch;setup",
+        "StartupNotify": "true"
+      },
+      "maintainer": "BigLinux AI Community",
+      "vendor": "BigLinux"
+    },
+    "pacman": {
+      "depends": ["nodejs", "npm", "docker", "nvidia-utils"]
+    },
+    "deb": {
+      "depends": ["nodejs", "npm", "docker-ce", "nvidia-driver-535"]
+    },
+    "appImage": {
+      "systemIntegration": "ask"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "batko15",
+      "repo": "biglinux-ai-setup-manager"
+    }
   }
 }

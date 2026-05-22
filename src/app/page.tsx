@@ -30,7 +30,7 @@ import {
 import { toolCategories, aiTools, getToolsByCategory, getPopularTools, type Tool } from '@/lib/tools-data';
 import { currentSystemProfile } from '@/lib/system-profile';
 
-export default function RHELAISetupManager() {
+export default function BigLinuxAISetupManager() {
   const [selectedTools, setSelectedTools] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
