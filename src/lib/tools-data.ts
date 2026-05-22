@@ -214,7 +214,7 @@ export const toolCategories: ToolCategory[] = [
     id: 'linux-distros',
     name: 'Linux Distributions',
     description: 'AI-optimized Linux distributions and environments',
-    icon: 'Linux',
+    icon: 'Monitor',
     color: 'bg-orange-600'
   },
   {
@@ -256,7 +256,7 @@ export const toolCategories: ToolCategory[] = [
     id: 'biglinux-tools',
     name: 'BigLinux/Manjaro Tools',
     description: 'BigLinux and Manjaro specific tools and optimizations',
-    icon: 'Linux',
+    icon: 'Monitor',
     color: 'bg-green-600'
   },
   {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { app, BrowserWindow, Menu, Tray, shell, dialog, ipcMain } = require('electron');
 const path = require('path');
 const { spawn } = require('child_process');
@@ -140,7 +141,11 @@ function createTray() {
   tray.setContextMenu(contextMenu);
   
   tray.on('click', () => {
-    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
+    if (mainWindow.isVisible()) {
+      mainWindow.hide();
+    } else {
+      mainWindow.show();
+    }
   });
 }
 
