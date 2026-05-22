@@ -1,0 +1,138 @@
+# BigLinux RTX 4070 AI Workstation Configuration
+# Generated for: Intel i5-12400F + RTX 4070 12GB + 32GB RAM
+
+system:
+  hostname: biglinux-ai-workstation
+  profile: rtx4070-alder-lake
+  
+hardware:
+  cpu:
+    model: "Intel Core i5-12400F"
+    cores: 6
+    threads: 12
+    architecture: "Alder Lake"
+    governor: performance
+    features:
+      - avx
+      - avx2
+      - vmx
+      
+  gpu:
+    model: "NVIDIA GeForce RTX 4070"
+    vram_gb: 12
+    driver: nvidia
+    driver_version: "595.71.05"
+    cuda_version: "12.4"
+    architecture: "Lovelace"
+    tensor_cores: true
+    capabilities:
+      - cuda
+      - tensorrt
+      - dlss
+      - fp16
+      - fp8
+      
+  memory:
+    ram_gb: 32
+    swap_type: "zram + swapfile"
+    swap_gb: 47.26
+    zram_enabled: true
+
+ai_configuration:
+  llm:
+    default_backend: ollama
+    vram_utilization: 0.9
+    max_model_size: "13B"
+    recommended_quantization: "Q4_K_M"
+    context_length: 8192
+    
+  inference:
+    batch_size: 512
+    gpu_memory_fraction: 0.85
+    max_num_seqs: 256
+    
+  models:
+    chat:
+      - name: "llama3.1:8b"
+        vram_gb: 5
+        use_case: "General chat and reasoning"
+      - name: "mistral:7b"
+        vram_gb: 4
+        use_case: "Efficient general purpose"
+      - name: "qwen2.5-coder:7b"
+        vram_gb: 4
+        use_case: "Code generation"
+        
+    coding:
+      - name: "deepseek-coder:6.7b"
+        vram_gb: 4
+        use_case: "Programming assistance"
+      - name: "codestral:22b"
+        vram_gb: 12
+        use_case: "Best coding (tight fit)"
+        
+    vision:
+      - name: "llava:7b"
+        vram_gb: 6
+        use_case: "Image understanding"
+        
+    speech:
+      - name: "whisper-large-v3"
+        vram_gb: 3
+        use_case: "Speech transcription"
+
+optimization:
+  cpu:
+    governor: performance
+    turbo_enabled: true
+    energy_perf_bias: performance
+    
+  gpu:
+    power_limit: 200  # Watts
+    fan_curve: auto
+    overclock: false
+    
+  memory:
+    swappiness: 10
+    vfs_cache_pressure: 50
+    transparent_hugepages: always
+    
+  kernel:
+    scheduler: mq-deadline
+    read_ahead_kb: 2048
+
+biglinux_specific:
+  package_manager: pacman
+  aur_helper: yay
+  flatpak_enabled: true
+  snap_enabled: false
+  
+  repos:
+    - "https://repo.biglinux.com.br/update-stable/$arch"
+    - "https://repo.communitybig.org/stable/$arch"
+    
+  desktop:
+    environment: cinnamon
+    display_manager: lightdm
+    audio_server: pipewire
+    
+  packages:
+    essential:
+      - cuda
+      - cudnn
+      - nvidia-container-toolkit
+      - ollama
+      - docker
+      - git
+      
+    development:
+      - python
+      - nodejs
+      - rust
+      - go
+      - code  # VS Code
+      
+    ai_tools:
+      - python-pip
+      - python-virtualenv
+      - jupyter-notebook

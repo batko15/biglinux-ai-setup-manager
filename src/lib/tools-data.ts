@@ -244,6 +244,34 @@ export const toolCategories: ToolCategory[] = [
     description: 'API key, secret, and credential management',
     icon: 'Key',
     color: 'bg-red-600'
+  },
+  {
+    id: 'hardware-optimization',
+    name: 'Hardware Optimization',
+    description: 'GPU, CPU, and system-specific optimizations',
+    icon: 'Cpu',
+    color: 'bg-cyan-600'
+  },
+  {
+    id: 'biglinux-tools',
+    name: 'BigLinux/Manjaro Tools',
+    description: 'BigLinux and Manjaro specific tools and optimizations',
+    icon: 'Linux',
+    color: 'bg-green-600'
+  },
+  {
+    id: 'rtx-optimization',
+    name: 'RTX 4070 Optimization',
+    description: 'NVIDIA RTX 4070 specific AI optimizations',
+    icon: 'Cpu',
+    color: 'bg-green-500'
+  },
+  {
+    id: 'intel-alder-lake',
+    name: 'Intel Alder Lake',
+    description: 'Intel 12th Gen optimization tools',
+    icon: 'Cpu',
+    color: 'bg-blue-600'
   }
 ];
 
@@ -7329,6 +7357,777 @@ export const aiTools: Tool[] = [
     homepage: 'https://passwordstore.org',
     repository: 'https://git.zx2c4.com/password-store',
     installCommand: 'sudo dnf install pass',
+    status: 'available'
+  },
+
+  // ==========================================
+  // HARDWARE OPTIMIZATION (15+)
+  // ==========================================
+  {
+    id: 'nvidia-cuda-toolkit',
+    name: 'NVIDIA CUDA Toolkit',
+    slug: 'nvidia-cuda-toolkit',
+    description: 'Complete CUDA development environment for GPU computing',
+    longDescription: 'NVIDIA CUDA Toolkit provides a comprehensive development environment for GPU-accelerated applications. Essential for AI/ML workloads on NVIDIA GPUs.',
+    category: 'hardware-optimization',
+    icon: '🟢',
+    tags: ['nvidia', 'cuda', 'gpu', 'compute'],
+    homepage: 'https://developer.nvidia.com/cuda-toolkit',
+    requirements: { os: ['Linux', 'Windows'], gpu: 'NVIDIA GPU' },
+    installCommand: 'sudo pacman -S cuda',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nvidia-cudnn',
+    name: 'NVIDIA cuDNN',
+    slug: 'nvidia-cudnn',
+    description: 'GPU-accelerated library of primitives for deep neural networks',
+    category: 'hardware-optimization',
+    icon: '🧠',
+    tags: ['nvidia', 'cudnn', 'deep-learning', 'gpu'],
+    homepage: 'https://developer.nvidia.com/cudnn',
+    requirements: { os: ['Linux'], gpu: 'NVIDIA GPU with CUDA' },
+    installCommand: 'sudo pacman -S cudnn',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nvidia-tensorrt',
+    name: 'NVIDIA TensorRT',
+    slug: 'nvidia-tensorrt',
+    description: 'High-performance deep learning inference optimizer and runtime',
+    category: 'hardware-optimization',
+    icon: '⚡',
+    tags: ['nvidia', 'tensorrt', 'inference', 'optimization'],
+    homepage: 'https://developer.nvidia.com/tensorrt',
+    requirements: { os: ['Linux'], gpu: 'NVIDIA GPU', ram: '8GB' },
+    installCommand: 'yay -S tensorrt',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nvidia-driver-595',
+    name: 'NVIDIA Driver 595.71',
+    slug: 'nvidia-driver-595',
+    description: 'Latest NVIDIA driver for RTX 40 series with DLSS 3.5',
+    category: 'hardware-optimization',
+    icon: '🎮',
+    tags: ['nvidia', 'driver', 'rtx40', 'dlss'],
+    homepage: 'https://www.nvidia.com/drivers',
+    installCommand: 'sudo pacman -S nvidia',
+    status: 'available'
+  },
+  {
+    id: 'nvtop',
+    name: 'NVTOP',
+    slug: 'nvtop',
+    description: 'NVIDIA GPU process monitoring tool (like htop for GPUs)',
+    category: 'hardware-optimization',
+    icon: '📊',
+    tags: ['nvidia', 'monitoring', 'gpu', 'process'],
+    repository: 'https://github.com/Syllo/nvtop',
+    installCommand: 'sudo pacman -S nvtop',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nvidia-smi',
+    name: 'NVIDIA-SMI',
+    slug: 'nvidia-smi',
+    description: 'NVIDIA System Management Interface for GPU monitoring',
+    category: 'hardware-optimization',
+    icon: '📈',
+    tags: ['nvidia', 'monitoring', 'gpu', 'cli'],
+    homepage: 'https://developer.nvidia.com/nvidia-system-management-interface',
+    installCommand: 'Included with NVIDIA driver',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'cuda-z',
+    name: 'CUDA-Z',
+    slug: 'cuda-z',
+    description: 'CUDA information and benchmarking tool',
+    category: 'hardware-optimization',
+    icon: '🔍',
+    tags: ['cuda', 'benchmark', 'gpu', 'info'],
+    repository: 'https://github.com/lynxis/cuda_z',
+    status: 'available'
+  },
+  {
+    id: 'gpu-burn',
+    name: 'GPU Burn',
+    slug: 'gpu-burn',
+    description: 'Multi-GPU CUDA stress test utility',
+    category: 'hardware-optimization',
+    icon: '🔥',
+    tags: ['cuda', 'stress-test', 'benchmark', 'gpu'],
+    repository: 'https://github.com/wilicc/gpu-burn',
+    installCommand: 'yay -S gpu-burn-git',
+    status: 'available'
+  },
+  {
+    id: 'amd-gpu-pro',
+    name: 'AMDGPU PRO',
+    slug: 'amd-gpu-pro',
+    description: 'AMD professional GPU driver with ROCm support',
+    category: 'hardware-optimization',
+    icon: '🔴',
+    tags: ['amd', 'gpu', 'rocm', 'driver'],
+    homepage: 'https://www.amd.com/en/support',
+    status: 'available'
+  },
+  {
+    id: 'intel-oneapi',
+    name: 'Intel oneAPI',
+    slug: 'intel-oneapi',
+    description: 'Intel oneAPI Base Toolkit for CPU/GPU optimization',
+    category: 'hardware-optimization',
+    icon: '🔵',
+    tags: ['intel', 'oneapi', 'gpu', 'cpu'],
+    homepage: 'https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html',
+    installCommand: 'yay -S intel-oneapi-basekit',
+    status: 'available'
+  },
+  {
+    id: 'intel-openvino',
+    name: 'Intel OpenVINO',
+    slug: 'intel-openvino',
+    description: 'Open-source toolkit for optimizing AI inference on Intel hardware',
+    category: 'hardware-optimization',
+    icon: '🎯',
+    tags: ['intel', 'openvino', 'inference', 'optimization'],
+    homepage: 'https://docs.openvino.ai',
+    repository: 'https://github.com/openvinotoolkit/openvino',
+    installCommand: 'pip install openvino',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nvidia-container-toolkit',
+    name: 'NVIDIA Container Toolkit',
+    slug: 'nvidia-container-toolkit',
+    description: 'Run GPU-accelerated containers with Docker',
+    category: 'hardware-optimization',
+    icon: '🐳',
+    tags: ['nvidia', 'docker', 'container', 'gpu'],
+    repository: 'https://github.com/NVIDIA/nvidia-container-toolkit',
+    installCommand: 'sudo pacman -S nvidia-container-toolkit',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'mellanox-ofed',
+    name: 'Mellanox OFED',
+    slug: 'mellanox-ofed',
+    description: 'Mellanox OpenFabrics Enterprise Distribution for InfiniBand',
+    category: 'hardware-optimization',
+    icon: '🌐',
+    tags: ['mellanox', 'infiniband', 'network', 'hpc'],
+    homepage: 'https://www.mellanox.com/products/infiniband-drivers',
+    status: 'available'
+  },
+  {
+    id: 'tuning-adm',
+    name: 'Tuned',
+    slug: 'tuning-adm',
+    description: 'Daemon for system tuning and optimization profiles',
+    category: 'hardware-optimization',
+    icon: '⚙️',
+    tags: ['tuning', 'performance', 'system', 'daemon'],
+    homepage: 'https://tuned-project.github.io/tuned/',
+    installCommand: 'sudo pacman -S tuned',
+    status: 'available'
+  },
+  {
+    id: 'auto-cpufreq',
+    name: 'auto-cpufreq',
+    slug: 'auto-cpufreq',
+    description: 'Automatic CPU speed and power optimization for Linux',
+    category: 'hardware-optimization',
+    icon: '🔋',
+    tags: ['cpu', 'power', 'optimization', 'frequency'],
+    repository: 'https://github.com/AdnanHodzic/auto-cpufreq',
+    installCommand: 'yay -S auto-cpufreq',
+    isPopular: true,
+    status: 'available'
+  },
+
+  // ==========================================
+  // BIGLINUX / MANJARO TOOLS (20+)
+  // ==========================================
+  {
+    id: 'biglinux-welcome',
+    name: 'BigLinux Welcome',
+    slug: 'biglinux-welcome',
+    description: 'BigLinux welcome and setup application',
+    category: 'biglinux-tools',
+    icon: '🐧',
+    tags: ['biglinux', 'setup', 'welcome'],
+    homepage: 'https://www.biglinux.com.br',
+    status: 'available'
+  },
+  {
+    id: 'biglinux-store',
+    name: 'BigLinux Store',
+    slug: 'biglinux-store',
+    description: 'BigLinux application store with Flatpak support',
+    category: 'biglinux-tools',
+    icon: '🏪',
+    tags: ['biglinux', 'store', 'flatpak', 'apps'],
+    homepage: 'https://www.biglinux.com.br',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'manjaro-settings-manager',
+    name: 'Manjaro Settings Manager',
+    slug: 'manjaro-settings-manager',
+    description: 'System settings and kernel management for Manjaro/BigLinux',
+    category: 'biglinux-tools',
+    icon: '⚙️',
+    tags: ['manjaro', 'settings', 'kernel', 'management'],
+    installCommand: 'sudo pacman -S manjaro-settings-manager',
+    status: 'available'
+  },
+  {
+    id: 'mhwd',
+    name: 'MHWD (Manjaro Hardware Detection)',
+    slug: 'mhwd',
+    description: 'Hardware detection and driver management for Manjaro',
+    category: 'biglinux-tools',
+    icon: '🔧',
+    tags: ['manjaro', 'hardware', 'drivers', 'detection'],
+    installCommand: 'sudo pacman -S mhwd',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'pacman',
+    name: 'Pacman',
+    slug: 'pacman',
+    description: 'Package manager for Arch-based systems',
+    longDescription: 'Pacman is the default package manager for Arch Linux and its derivatives like Manjaro and BigLinux. It combines a simple binary package format with an easy-to-use build system.',
+    category: 'biglinux-tools',
+    icon: '📦',
+    tags: ['arch', 'pacman', 'package-manager', 'linux'],
+    homepage: 'https://wiki.archlinux.org/title/pacman',
+    installCommand: 'Built-in',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'yay',
+    name: 'Yay (AUR Helper)',
+    slug: 'yay',
+    description: 'Yet another Yogurt - AUR helper for Arch-based systems',
+    category: 'biglinux-tools',
+    icon: '🎯',
+    tags: ['aur', 'yay', 'package-manager', 'arch'],
+    repository: 'https://github.com/Jguer/yay',
+    installCommand: 'sudo pacman -S yay',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'paru',
+    name: 'Paru (AUR Helper)',
+    slug: 'paru',
+    description: 'Feature packed AUR helper written in Rust',
+    category: 'biglinux-tools',
+    icon: '🦀',
+    tags: ['aur', 'paru', 'rust', 'package-manager'],
+    repository: 'https://github.com/Morganamilo/paru',
+    installCommand: 'sudo pacman -S paru',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'flatpak',
+    name: 'Flatpak',
+    slug: 'flatpak',
+    description: 'Universal application deployment framework',
+    category: 'biglinux-tools',
+    icon: '📦',
+    tags: ['flatpak', 'sandbox', 'universal', 'apps'],
+    homepage: 'https://flatpak.org',
+    installCommand: 'sudo pacman -S flatpak',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'snapd',
+    name: 'Snapd',
+    slug: 'snapd',
+    description: 'Daemon and tooling for snap packages',
+    category: 'biglinux-tools',
+    icon: '📦',
+    tags: ['snap', 'canonical', 'packages', 'universal'],
+    homepage: 'https://snapcraft.io',
+    installCommand: 'sudo pacman -S snapd',
+    status: 'available'
+  },
+  {
+    id: 'pamac',
+    name: 'Pamac',
+    slug: 'pamac',
+    description: 'Graphical package manager for Manjaro/BigLinux',
+    category: 'biglinux-tools',
+    icon: '🛒',
+    tags: ['manjaro', 'gui', 'package-manager', 'flatpak'],
+    installCommand: 'sudo pacman -S pamac',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'timeshift',
+    name: 'Timeshift',
+    slug: 'timeshift',
+    description: 'System restore tool for Linux with BTRRS/rsync support',
+    category: 'biglinux-tools',
+    icon: '⏪',
+    tags: ['backup', 'restore', 'snapshot', 'btrfs'],
+    repository: 'https://github.com/teejee2008/timeshift',
+    installCommand: 'sudo pacman -S timeshift',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'manjaro-starter',
+    name: 'Manjaro Starter',
+    slug: 'manjaro-starter',
+    description: 'Getting started application for new Manjaro users',
+    category: 'biglinux-tools',
+    icon: '🚀',
+    tags: ['manjaro', 'setup', 'starter', 'beginner'],
+    installCommand: 'sudo pacman -S manjaro-starter',
+    status: 'available'
+  },
+  {
+    id: 'kernel-manager',
+    name: 'Kernel Manager',
+    slug: 'kernel-manager',
+    description: 'GUI for managing Linux kernels on Arch-based systems',
+    category: 'biglinux-tools',
+    icon: '🐧',
+    tags: ['kernel', 'management', 'arch', 'gui'],
+    installCommand: 'yay -S kernel-manager',
+    status: 'available'
+  },
+  {
+    id: 'grub-customizer',
+    name: 'Grub Customizer',
+    slug: 'grub-customizer',
+    description: 'Graphical GRUB configuration tool',
+    category: 'biglinux-tools',
+    icon: '🔧',
+    tags: ['grub', 'bootloader', 'configuration', 'gui'],
+    installCommand: 'sudo pacman -S grub-customizer',
+    status: 'available'
+  },
+  {
+    id: 'cinnamon-desktop',
+    name: 'Cinnamon Desktop',
+    slug: 'cinnamon-desktop',
+    description: 'Modern desktop environment (your current DE)',
+    category: 'biglinux-tools',
+    icon: '🖥️',
+    tags: ['cinnamon', 'desktop', 'environment', 'linux'],
+    homepage: 'https://projects.linuxmint.com/cinnamon/',
+    installCommand: 'sudo pacman -S cinnamon',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'lightdm',
+    name: 'LightDM',
+    slug: 'lightdm',
+    description: 'Cross-desktop display manager',
+    category: 'biglinux-tools',
+    icon: '🖥️',
+    tags: ['lightdm', 'display-manager', 'login'],
+    homepage: 'https://github.com/canonical/lightdm',
+    installCommand: 'sudo pacman -S lightdm',
+    status: 'available'
+  },
+  {
+    id: 'muffin-wm',
+    name: 'Muffin Window Manager',
+    slug: 'muffin-wm',
+    description: 'Window manager for Cinnamon desktop',
+    category: 'biglinux-tools',
+    icon: '🪟',
+    tags: ['muffin', 'window-manager', 'cinnamon'],
+    installCommand: 'sudo pacman -S muffin',
+    status: 'available'
+  },
+  {
+    id: 'pipewire-audio',
+    name: 'PipeWire Audio',
+    slug: 'pipewire-audio',
+    description: 'Modern audio/video stream management (your current audio server)',
+    category: 'biglinux-tools',
+    icon: '🔊',
+    tags: ['pipewire', 'audio', 'video', 'streaming'],
+    homepage: 'https://pipewire.org',
+    installCommand: 'sudo pacman -S pipewire pipewire-pulse wireplumber',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'wireplumber',
+    name: 'WirePlumber',
+    slug: 'wireplumber',
+    description: 'Session/policy manager for PipeWire',
+    category: 'biglinux-tools',
+    icon: '🔌',
+    tags: ['pipewire', 'session-manager', 'policy'],
+    installCommand: 'sudo pacman -S wireplumber',
+    status: 'available'
+  },
+  {
+    id: 'zram-generator',
+    name: 'ZRAM Generator',
+    slug: 'zram-generator',
+    description: 'Systemd unit generator for zram devices (your swap)',
+    category: 'biglinux-tools',
+    icon: '💾',
+    tags: ['zram', 'swap', 'memory', 'compression'],
+    repository: 'https://github.com/systemd/zram-generator',
+    installCommand: 'sudo pacman -S zram-generator',
+    status: 'available'
+  },
+
+  // ==========================================
+  // RTX 4070 OPTIMIZATION (15+)
+  // ==========================================
+  {
+    id: 'rtx4070-vram-optimizer',
+    name: 'RTX 4070 VRAM Optimizer',
+    slug: 'rtx4070-vram-optimizer',
+    description: 'Optimize 12GB VRAM usage for AI workloads on RTX 4070',
+    longDescription: 'Configuration profiles and tools to maximize VRAM efficiency for LLM inference on RTX 4070 with 12GB VRAM.',
+    category: 'rtx-optimization',
+    icon: '🎮',
+    tags: ['rtx4070', 'vram', 'optimization', 'ai'],
+    configOptions: [
+      { key: 'vram_limit', label: 'VRAM Limit (GB)', type: 'number', default: 11.5, description: 'Maximum VRAM to use (leave 0.5GB buffer)' },
+      { key: 'quantization', label: 'Default Quantization', type: 'select', default: 'q4_k_m', options: [{ value: 'q4_k_m', label: 'Q4_K_M (Recommended)' }, { value: 'q5_k_m', label: 'Q5_K_M (Better quality)' }, { value: 'q6_k', label: 'Q6_K (High quality)' }, { value: 'q8_0', label: 'Q8_0 (Near full)' }] },
+      { key: 'context_length', label: 'Context Length', type: 'select', default: '8192', options: [{ value: '4096', label: '4096' }, { value: '8192', label: '8192' }, { value: '16384', label: '16384' }, { value: '32768', label: '32768' }] }
+    ],
+    status: 'available'
+  },
+  {
+    id: 'llama3-8b-rtx4070',
+    name: 'Llama 3.1 8B (RTX 4070 Optimized)',
+    slug: 'llama3-8b-rtx4070',
+    description: 'Llama 3.1 8B optimized for RTX 4070 12GB',
+    longDescription: 'Perfect fit for RTX 4070. Runs at full speed with Q4_K_M quantization using ~5GB VRAM.',
+    category: 'rtx-optimization',
+    icon: '🦙',
+    tags: ['llama3', '8b', 'rtx4070', 'optimized'],
+    installCommand: 'ollama pull llama3.1:8b',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'mistral-7b-rtx4070',
+    name: 'Mistral 7B (RTX 4070 Optimized)',
+    slug: 'mistral-7b-rtx4070',
+    description: 'Mistral 7B optimized for RTX 4070 12GB',
+    longDescription: 'Excellent for RTX 4070. Uses ~4GB VRAM with Q4_K_M, leaving room for larger context.',
+    category: 'rtx-optimization',
+    icon: '🌀',
+    tags: ['mistral', '7b', 'rtx4070', 'optimized'],
+    installCommand: 'ollama pull mistral:7b',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'qwen2.5-coder-7b-rtx4070',
+    name: 'Qwen 2.5 Coder 7B (RTX 4070)',
+    slug: 'qwen25-coder-7b-rtx4070',
+    description: 'Code generation model optimized for RTX 4070',
+    longDescription: 'Best coding model for RTX 4070. Excellent for programming tasks with ~4GB VRAM.',
+    category: 'rtx-optimization',
+    icon: '💻',
+    tags: ['qwen', 'coder', 'rtx4070', 'programming'],
+    installCommand: 'ollama pull qwen2.5-coder:7b',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'deepseek-coder-6.7b-rtx4070',
+    name: 'DeepSeek Coder 6.7B (RTX 4070)',
+    slug: 'deepseek-coder-67b-rtx4070',
+    description: 'DeepSeek Coder optimized for RTX 4070',
+    category: 'rtx-optimization',
+    icon: '🧠',
+    tags: ['deepseek', 'coder', 'rtx4070', 'code'],
+    installCommand: 'ollama pull deepseek-coder:6.7b',
+    status: 'available'
+  },
+  {
+    id: 'phi-3-mini-rtx4070',
+    name: 'Phi-3 Mini (RTX 4070)',
+    slug: 'phi3-mini-rtx4070',
+    description: 'Microsoft Phi-3 Mini - extremely efficient for RTX 4070',
+    longDescription: 'Tiny but powerful model, uses only ~2GB VRAM. Perfect for quick tasks.',
+    category: 'rtx-optimization',
+    icon: '🔬',
+    tags: ['phi3', 'mini', 'rtx4070', 'efficient'],
+    installCommand: 'ollama pull phi3:mini',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'gemma2-9b-rtx4070',
+    name: 'Gemma 2 9B (RTX 4070)',
+    slug: 'gemma2-9b-rtx4070',
+    description: 'Google Gemma 2 9B optimized for RTX 4070',
+    longDescription: 'Uses ~6GB VRAM with Q4_K_M. Good balance of quality and speed.',
+    category: 'rtx-optimization',
+    icon: '💎',
+    tags: ['gemma', 'google', 'rtx4070', '9b'],
+    installCommand: 'ollama pull gemma2:9b',
+    status: 'available'
+  },
+  {
+    id: 'codestral-22b-rtx4070',
+    name: 'Codestral 22B (RTX 4070 Q4)',
+    slug: 'codestral-22b-rtx4070',
+    description: 'Mistral Codestral 22B with Q4 quantization for RTX 4070',
+    longDescription: 'Uses ~12GB VRAM (tight fit). Enable offload for larger context. Best coding model.',
+    category: 'rtx-optimization',
+    icon: '💻',
+    tags: ['codestral', 'mistral', 'rtx4070', 'code'],
+    installCommand: 'ollama pull codestral:22b',
+    status: 'available'
+  },
+  {
+    id: 'llava-7b-rtx4070',
+    name: 'LLaVA 7B Vision (RTX 4070)',
+    slug: 'llava-7b-rtx4070',
+    description: 'Vision-language model for RTX 4070',
+    longDescription: 'Multimodal model for image understanding. Uses ~6GB VRAM.',
+    category: 'rtx-optimization',
+    icon: '👁️',
+    tags: ['llava', 'vision', 'rtx4070', 'multimodal'],
+    installCommand: 'ollama pull llava:7b',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'nvidia-dlss',
+    name: 'NVIDIA DLSS 3.5',
+    slug: 'nvidia-dlss',
+    description: 'Deep Learning Super Sampling for RTX 40 series',
+    category: 'rtx-optimization',
+    icon: '🎮',
+    tags: ['dlss', 'nvidia', 'gaming', 'ai'],
+    homepage: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/',
+    status: 'available'
+  },
+  {
+    id: 'nvidia-reflex',
+    name: 'NVIDIA Reflex',
+    slug: 'nvidia-reflex',
+    description: 'Low latency gaming technology for RTX 40 series',
+    category: 'rtx-optimization',
+    icon: '⚡',
+    tags: ['reflex', 'nvidia', 'latency', 'gaming'],
+    homepage: 'https://www.nvidia.com/en-us/geforce/news/reflex-low-latency-platform/',
+    status: 'available'
+  },
+  {
+    id: 'cuda-memory-pool',
+    name: 'CUDA Memory Pool',
+    slug: 'cuda-memory-pool',
+    description: 'Memory pool optimization for RTX 4070',
+    category: 'rtx-optimization',
+    icon: '💾',
+    tags: ['cuda', 'memory', 'pool', 'optimization'],
+    configOptions: [
+      { key: 'pool_size', label: 'Pool Size (GB)', type: 'number', default: 10 },
+      { key: 'threshold', label: 'Release Threshold', type: 'number', default: 0.8 }
+    ],
+    status: 'available'
+  },
+  {
+    id: 'tensorrt-llm-rtx4070',
+    name: 'TensorRT-LLM (RTX 4070)',
+    slug: 'tensorrt-llm-rtx4070',
+    description: 'NVIDIA TensorRT for LLM inference on RTX 4070',
+    longDescription: 'Maximum performance inference for RTX 40 series. Up to 8x faster than CPU.',
+    category: 'rtx-optimization',
+    icon: '🚀',
+    tags: ['tensorrt', 'llm', 'nvidia', 'inference'],
+    repository: 'https://github.com/NVIDIA/TensorRT-LLM',
+    installCommand: 'pip install tensorrt-llm',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'vllm-rtx4070',
+    name: 'vLLM (RTX 4070 Config)',
+    slug: 'vllm-rtx4070',
+    description: 'vLLM configuration for RTX 4070 12GB',
+    longDescription: 'High-throughput serving with PagedAttention. Optimized settings for 12GB VRAM.',
+    category: 'rtx-optimization',
+    icon: '⚡',
+    tags: ['vllm', 'rtx4070', 'serving', 'inference'],
+    installCommand: 'pip install vllm',
+    configOptions: [
+      { key: 'gpu_memory_utilization', label: 'GPU Memory Utilization', type: 'number', default: 0.9 },
+      { key: 'max_model_len', label: 'Max Context Length', type: 'number', default: 8192 },
+      { key: 'tensor_parallel_size', label: 'Tensor Parallel Size', type: 'number', default: 1 }
+    ],
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'whisper-rtx4070',
+    name: 'Whisper Large V3 (RTX 4070)',
+    slug: 'whisper-rtx4070',
+    description: 'OpenAI Whisper optimized for RTX 4070 GPU acceleration',
+    category: 'rtx-optimization',
+    icon: '🎤',
+    tags: ['whisper', 'speech', 'rtx4070', 'transcription'],
+    installCommand: 'pip install openai-whisper',
+    isPopular: true,
+    status: 'available'
+  },
+
+  // ==========================================
+  // INTEL ALDER LAKE OPTIMIZATION (10+)
+  // ==========================================
+  {
+    id: 'intel-governor',
+    name: 'Intel P-State Governor',
+    slug: 'intel-governor',
+    description: 'CPU frequency scaling for Intel 12th Gen (Alder Lake)',
+    longDescription: 'Optimize your i5-12400F performance and power consumption with intel_pstate driver.',
+    category: 'intel-alder-lake',
+    icon: '⚡',
+    tags: ['intel', 'alder-lake', 'governor', 'cpu'],
+    configOptions: [
+      { key: 'governor', label: 'CPU Governor', type: 'select', default: 'performance', options: [{ value: 'performance', label: 'Performance' }, { value: 'powersave', label: 'Power Save' }, { value: 'balanced', label: 'Balanced' }] },
+      { key: 'no_turbo', label: 'Disable Turbo', type: 'boolean', default: false }
+    ],
+    status: 'available'
+  },
+  {
+    id: 'intel-microcode',
+    name: 'Intel Microcode',
+    slug: 'intel-microcode',
+    description: 'Intel CPU microcode updates for security and stability',
+    category: 'intel-alder-lake',
+    icon: '🔧',
+    tags: ['intel', 'microcode', 'security', 'cpu'],
+    installCommand: 'sudo pacman -S intel-ucode',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'thermald',
+    name: 'Thermald',
+    slug: 'thermald',
+    description: 'Thermal daemon for Intel CPUs',
+    longDescription: 'Prevent thermal throttling on your i5-12400F during AI workloads.',
+    category: 'intel-alder-lake',
+    icon: '🌡️',
+    tags: ['thermal', 'intel', 'daemon', 'monitoring'],
+    repository: 'https://github.com/intel/thermal_daemon',
+    installCommand: 'sudo pacman -S thermald',
+    status: 'available'
+  },
+  {
+    id: 'intel-mkl',
+    name: 'Intel MKL',
+    slug: 'intel-mkl',
+    description: 'Intel Math Kernel Library for optimized math operations',
+    category: 'intel-alder-lake',
+    icon: '📊',
+    tags: ['intel', 'mkl', 'math', 'optimization'],
+    homepage: 'https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html',
+    installCommand: 'pip install mkl',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'tbb-intel',
+    name: 'Intel TBB',
+    slug: 'tbb-intel',
+    description: 'Threading Building Blocks for parallel programming',
+    category: 'intel-alder-lake',
+    icon: '🧵',
+    tags: ['intel', 'tbb', 'threading', 'parallel'],
+    homepage: 'https://github.com/oneapi-src/oneTBB',
+    installCommand: 'sudo pacman -S intel-tbb',
+    status: 'available'
+  },
+  {
+    id: 'htop-i5',
+    name: 'HTOP (CPU Monitor)',
+    slug: 'htop-i5',
+    description: 'Interactive process viewer optimized for 12-thread CPUs',
+    category: 'intel-alder-lake',
+    icon: '📊',
+    tags: ['monitoring', 'process', 'cpu', 'htop'],
+    installCommand: 'sudo pacman -S htop',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'glances',
+    name: 'Glances',
+    slug: 'glances',
+    description: 'Cross-platform monitoring tool with web interface',
+    category: 'intel-alder-lake',
+    icon: '👁️',
+    tags: ['monitoring', 'system', 'web', 'cross-platform'],
+    repository: 'https://github.com/nicolargo/glances',
+    installCommand: 'sudo pacman -S glances',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'cpupower',
+    name: 'cpupower',
+    slug: 'cpupower',
+    description: 'CPU frequency and power management tool',
+    category: 'intel-alder-lake',
+    icon: '⚡',
+    tags: ['cpu', 'frequency', 'power', 'management'],
+    installCommand: 'sudo pacman -S cpupower',
+    status: 'available'
+  },
+  {
+    id: 'intel-gpu-tools',
+    name: 'Intel GPU Tools',
+    slug: 'intel-gpu-tools',
+    description: 'Tools for Intel GPU debugging and performance analysis',
+    category: 'intel-alder-lake',
+    icon: '🎮',
+    tags: ['intel', 'gpu', 'debug', 'tools'],
+    installCommand: 'sudo pacman -S intel-gpu-tools',
+    status: 'available'
+  },
+  {
+    id: 'performance-profile',
+    name: 'Performance Profile',
+    slug: 'performance-profile',
+    description: 'Optimized system profile for AI workloads on Alder Lake',
+    category: 'intel-alder-lake',
+    icon: '🚀',
+    tags: ['performance', 'profile', 'ai', 'optimization'],
+    configOptions: [
+      { key: 'cpu_governor', label: 'CPU Governor', type: 'select', default: 'performance', options: [{ value: 'performance', label: 'Performance' }, { value: 'powersave', label: 'Power Save' }] },
+      { key: 'swappiness', label: 'Swappiness', type: 'number', default: 10 },
+      { key: 'zram_enabled', label: 'Enable ZRAM', type: 'boolean', default: true },
+      { key: 'transparent_hugepages', label: 'Transparent Hugepages', type: 'select', default: 'always', options: [{ value: 'always', label: 'Always' }, { value: 'madvise', label: 'Madvise' }, { value: 'never', label: 'Never' }] }
+    ],
     status: 'available'
   }
 ];

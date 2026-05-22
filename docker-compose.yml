@@ -1,12 +1,10 @@
-# RHEL AI Setup - Docker Compose
-# Vollständiges AI-Stack Setup
+# BigLinux RTX 4070 AI Stack - Docker Compose
+# Optimized for: Intel i5-12400F + RTX 4070 12GB + 32GB RAM
 
 version: '3.8'
 
 services:
-  # ==========================================
-  # Ollama - LLM Inference
-  # ==========================================
+  # Ollama - Local LLM Inference
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
@@ -15,47 +13,37 @@ services:
       - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
-      - ./configs/ollama:/root/.ollama/config:ro
-    environment:
-      - OLLAMA_HOST=0.0.0.0
-      - OLLAMA_ORIGINS=*
-      - OLLAMA_MAX_LOADED_MODELS=4
-      - OLLAMA_KEEP_ALIVE=24h
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              count: 1
               capabilities: [gpu]
+    environment:
+      - OLLAMA_ORIGINS=*
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/version"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  # ==========================================
   # Open WebUI - Chat Interface
-  # ==========================================
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     restart: unless-stopped
     ports:
-      - "3000:8080"
+      - "3001:8080"
     volumes:
-      - openwebui_data:/app/backend/data
+      - open_webui_data:/app/backend/data
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434
-      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change-me}
-      - ENABLE_RAG_WEB_SEARCH=true
-      - ENABLE_IMAGE_GENERATION=true
+      - WEBUI_SECRET_KEY=your-secret-key-here
     depends_on:
       - ollama
 
-  # ==========================================
-  # Qdrant - Vector Database
-  # ==========================================
+  # Qdrant - Vector Database for RAG
   qdrant:
     image: qdrant/qdrant:latest
     container_name: qdrant
@@ -65,12 +53,8 @@ services:
       - "6334:6334"
     volumes:
       - qdrant_data:/qdrant/storage
-    environment:
-      - QDRANT_API_KEY=${QDRANT_API_KEY:-}
 
-  # ==========================================
-  # ChromaDB - Vector Database Alternative
-  # ==========================================
+  # ChromaDB - Vector Database
   chromadb:
     image: chromadb/chroma:latest
     container_name: chromadb
@@ -80,66 +64,131 @@ services:
     volumes:
       - chroma_data:/chroma/chroma
     environment:
-      - CHROMA_SERVER_HOST=0.0.0.0
-      - CHROMA_SERVER_HTTP_PORT=8000
-      - ALLOW_RESET=true
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
 
-  # ==========================================
-  # Prometheus - Monitoring
-  # ==========================================
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
+  # LocalAI - OpenAI-compatible API
+  localai:
+    image: localai/localai:latest-gpu-cuda-12
+    container_name: localai
     restart: unless-stopped
     ports:
-      - "9090:9090"
+      - "8080:8080"
     volumes:
-      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus_data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.enable-lifecycle'
-
-  # ==========================================
-  # Grafana - Visualization
-  # ==========================================
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    restart: unless-stopped
-    ports:
-      - "3001:3000"
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./configs/grafana/provisioning:/etc/grafana/provisioning:ro
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
-    depends_on:
-      - prometheus
-
-  # ==========================================
-  # DCGM Exporter - GPU Metrics
-  # ==========================================
-  dcgm-exporter:
-    image: nvcr.io/nvidia/k8s/dcgm-exporter:latest
-    container_name: dcgm-exporter
-    restart: unless-stopped
-    ports:
-      - "9400:9400"
+      - localai_models:/models
+      - ./configs/localai:/config
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              count: 1
               capabilities: [gpu]
+    environment:
+      - MODELS_PATH=/models
+      - THREADS=12
+      - CONTEXT_SIZE=8192
+      - GPU=true
 
-  # ==========================================
-  # Redis - Caching
-  # ==========================================
+  # Whisper - Speech-to-Text
+  whisper:
+    image: onerahmet/openai-whisper-asr-webservice:latest-gpu
+    container_name: whisper
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - ASR_MODEL=large-v3
+      - ASR_ENGINE=faster_whisper
+
+  # Stable Diffusion WebUI
+  stable-diffusion:
+    image: siutin/stable-diffusion-webui-docker:latest-cuda
+    container_name: stable-diffusion
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    volumes:
+      - sd_models:/app/models
+      - sd_outputs:/app/outputs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - CLI_ARGS=--xformers --listen --enable-insecure-extension-access
+
+  # LangFlow - Visual AI Builder
+  langflow:
+    image: langflowai/langflow:latest
+    container_name: langflow
+    restart: unless-stopped
+    ports:
+      - "7861:7860"
+    environment:
+      - LANGFLOW_DATABASE_URL=sqlite:////app/data/langflow.db
+    volumes:
+      - langflow_data:/app/data
+
+  # Flowise - Visual AI Builder
+  flowise:
+    image: flowiseai/flowise:latest
+    container_name: flowise
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+    volumes:
+      - flowise_data:/root/.flowise
+    environment:
+      - DATABASE_PATH=/root/.flowise
+      - APIKEY_PATH=/root/.flowise
+
+  # Text Generation WebUI (oobabooga)
+  text-gen-webui:
+    image: atinoda/text-generation-webui:latest-cuda
+    container_name: text-gen-webui
+    restart: unless-stopped
+    ports:
+      - "7862:7860"
+    volumes:
+      - textgen_models:/app/models
+      - textgen_extensions:/app/extensions
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - GPU=true
+      - LISTEN=true
+      - API=true
+
+  # Jupyter Lab for AI Development
+  jupyter:
+    image: jupyter/tensorflow-notebook:latest
+    container_name: jupyter
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    volumes:
+      - jupyter_data:/home/jovyan/work
+      - ./notebooks:/home/jovyan/work/notebooks
+    environment:
+      - JUPYTER_TOKEN=your-token-here
+
+  # Redis for caching
   redis:
     image: redis:alpine
     container_name: redis
@@ -148,101 +197,38 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
-    command: redis-server --appendonly yes
 
-  # ==========================================
-  # PostgreSQL - Database
-  # ==========================================
-  postgres:
-    image: postgres:16-alpine
-    container_name: postgres
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
     restart: unless-stopped
     ports:
-      - "5432:5432"
+      - "80:80"
+      - "443:443"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=ai_user
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-change-me}
-      - POSTGRES_DB=ai_db
+      - ./configs/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - nginx_data:/var/log/nginx
+    depends_on:
+      - open-webui
+      - ollama
 
-  # ==========================================
-  # pgvector - PostgreSQL mit Vektor-Extension
-  # ==========================================
-  pgvector:
-    image: pgvector/pgvector:pg16
-    container_name: pgvector
-    restart: unless-stopped
-    ports:
-      - "5433:5432"
-    volumes:
-      - pgvector_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=vector_user
-      - POSTGRES_PASSWORD=${PGVECTOR_PASSWORD:-change-me}
-      - POSTGRES_DB=vector_db
-
-  # ==========================================
-  # MinIO - Object Storage
-  # ==========================================
-  minio:
-    image: minio/minio:latest
-    container_name: minio
-    restart: unless-stopped
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - minio_data:/data
-    environment:
-      - MINIO_ROOT_USER=minioadmin
-      - MINIO_ROOT_PASSWORD=${MINIO_PASSWORD:-minioadmin}
-    command: server /data --console-address ":9001"
-
-  # ==========================================
-  # LocalAI - Alternative Inference
-  # ==========================================
-  localai:
-    image: localai/localai:latest
-    container_name: localai
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    volumes:
-      - localai_data:/models
-      - ./configs/localai:/etc/localai:ro
-    environment:
-      - MODELS_PATH=/models
-      - THREADS=8
-      - CONTEXT_SIZE=4096
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
-# ==========================================
-# Volumes
-# ==========================================
 volumes:
   ollama_data:
-  openwebui_data:
+  open_webui_data:
   qdrant_data:
   chroma_data:
-  prometheus_data:
-  grafana_data:
+  localai_models:
+  sd_models:
+  sd_outputs:
+  langflow_data:
+  flowise_data:
+  textgen_models:
+  textgen_extensions:
+  jupyter_data:
   redis_data:
-  postgres_data:
-  pgvector_data:
-  minio_data:
-  localai_data:
+  nginx_data:
 
-# ==========================================
-# Networks
-# ==========================================
 networks:
   default:
-    name: rhel-ai-network
-    driver: bridge
+    name: ai-network

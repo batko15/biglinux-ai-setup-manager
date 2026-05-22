@@ -23,9 +23,11 @@ import {
   Settings, Play, Trash2, Info, ExternalLink, Copy, CheckCircle2,
   Zap, Star, Filter, ChevronRight, Package, Server, HardDrive,
   Cog, FileCode, Box, LayoutGrid, List, RefreshCw, Clock, Mic, BarChart, 
-  MessageSquare, Music, Headphones, PenTool, Sparkles
+  MessageSquare, Music, Headphones, PenTool, Sparkles, MemoryStick, Wifi,
+  MonitorSpeaker, Cpu as GpuIcon, Thermometer, Eye
 } from 'lucide-react';
 import { toolCategories, aiTools, getToolsByCategory, getPopularTools, type Tool, type ToolCategory, type ConfigOption } from '@/lib/tools-data';
+import { currentSystemProfile, type SystemProfile } from '@/lib/system-profile';
 
 export default function RHELAISetupManager() {
   const [selectedTools, setSelectedTools] = useState<Set<string>>(new Set());
@@ -256,19 +258,80 @@ export default function RHELAISetupManager() {
             <Separator />
             
             <div>
-              <h3 className="text-sm font-semibold mb-2">System-Status</h3>
+              <h3 className="text-sm font-semibold mb-2">System-Profil</h3>
+              <div className="space-y-3 text-sm">
+                <div className="p-2 rounded-md bg-green-500/10 border border-green-500/20">
+                  <div className="flex items-center gap-2 text-green-600 font-medium">
+                    <Server className="h-4 w-4" />
+                    {currentSystemProfile.os.name}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Kernel {currentSystemProfile.os.kernel.split('-')[0]}
+                  </p>
+                </div>
+                
+                <div className="p-2 rounded-md bg-blue-500/10 border border-blue-500/20">
+                  <div className="flex items-center gap-2 text-blue-600 font-medium">
+                    <Cpu className="h-4 w-4" />
+                    {currentSystemProfile.hardware.cpu.model}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {currentSystemProfile.hardware.cpu.cores}C/{currentSystemProfile.hardware.cpu.threads}T • {currentSystemProfile.hardware.cpu.architecture}
+                  </p>
+                </div>
+                
+                <div className="p-2 rounded-md bg-purple-500/10 border border-purple-500/20">
+                  <div className="flex items-center gap-2 text-purple-600 font-medium">
+                    <Activity className="h-4 w-4" />
+                    {currentSystemProfile.hardware.gpu.model}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {currentSystemProfile.hardware.gpu.vram}GB VRAM • Driver {currentSystemProfile.hardware.gpu.driverVersion}
+                  </p>
+                </div>
+                
+                <div className="p-2 rounded-md bg-amber-500/10 border border-amber-500/20">
+                  <div className="flex items-center gap-2 text-amber-600 font-medium">
+                    <MemoryStick className="h-4 w-4" />
+                    {currentSystemProfile.hardware.ram.total} GB RAM
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {currentSystemProfile.hardware.ram.swap.type} • {currentSystemProfile.hardware.ram.swap.total.toFixed(1)} GB Swap
+                  </p>
+                </div>
+                
+                <div className="p-2 rounded-md bg-cyan-500/10 border border-cyan-500/20">
+                  <div className="flex items-center gap-2 text-cyan-600 font-medium">
+                    <Monitor className="h-4 w-4" />
+                    {currentSystemProfile.desktop.environment} {currentSystemProfile.desktop.version}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {currentSystemProfile.hardware.display.model}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <Separator />
+            
+            <div>
+              <h3 className="text-sm font-semibold mb-2">KI-Kapazitäten</h3>
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">CPU</span>
-                  <span>Verfügbar</span>
+                <div className="flex items-center gap-2">
+                  <Brain className="h-4 w-4 text-primary" />
+                  <span>LLM: {currentSystemProfile.aiCapabilities.localLLM.maxModelSize}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">RAM</span>
-                  <span>Verfügbar</span>
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="h-4 w-4 text-primary" />
+                  <span>Bild: {currentSystemProfile.aiCapabilities.imageGeneration.supported ? 'Unterstützt' : 'Nicht unterstützt'}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">GPU</span>
-                  <span>Erkannt</span>
+                <div className="flex items-center gap-2">
+                  <Mic className="h-4 w-4 text-primary" />
+                  <span>Sprache: {currentSystemProfile.aiCapabilities.speechRecognition.supported ? 'Unterstützt' : 'Nicht unterstützt'}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Eye className="h-4 w-4 text-primary" />
+                  <span>Vision: {currentSystemProfile.aiCapabilities.visionModels.supported ? 'Unterstützt' : 'Nicht unterstützt'}</span>
                 </div>
               </div>
             </div>
@@ -351,6 +414,40 @@ export default function RHELAISetupManager() {
                         {selectedTools.has(tool.slug) && (
                           <CheckCircle2 className="h-4 w-4 text-primary mx-auto mt-2" />
                         )}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* RTX 4070 Recommended Models */}
+            {activeCategory === 'all' && !searchQuery && (
+              <div className="mb-8">
+                <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <Cpu className="h-5 w-5 text-purple-500" />
+                  Empfohlene Modelle für RTX 4070 (12GB VRAM)
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {currentSystemProfile.recommendedModels.slice(0, 8).map((model) => (
+                    <Card 
+                      key={model.name}
+                      className="border-purple-500/20 hover:border-purple-500/40 transition-all"
+                    >
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-medium">{model.name}</h3>
+                          <Badge variant="outline" className="text-xs">
+                            {model.vramRequired}
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-2">{model.useCase}</p>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-muted-foreground">{model.quantization}</span>
+                          <code className="bg-muted px-1.5 py-0.5 rounded text-xs">
+                            ollama pull
+                          </code>
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
