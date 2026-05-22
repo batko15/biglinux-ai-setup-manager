@@ -5192,6 +5192,493 @@ export const aiTools: Tool[] = [
   },
 
   // ==========================================
+  // LINUX SYSTEM TOOLS (20+)
+  // ==========================================
+  {
+    id: 'linux-kernel-optimization',
+    name: 'Linux Kernel Optimization',
+    slug: 'linux-kernel-optimization',
+    description: 'Kernel tuning for AI/ML workloads',
+    category: 'linux-distros',
+    icon: '🔧',
+    tags: ['kernel', 'optimization', 'performance', 'sysctl'],
+    status: 'available',
+    configOptions: [
+      { key: 'swappiness', label: 'Swappiness', type: 'number', default: 10, description: 'VM swappiness (1-100)' },
+      { key: 'transparentHugepages', label: 'Transparent Hugepages', type: 'select', default: 'madvise', options: [
+        { value: 'always', label: 'Always' },
+        { value: 'madvise', label: 'Madvise' },
+        { value: 'never', label: 'Never' }
+      ]},
+      { key: 'maxMapCount', label: 'Max Map Count', type: 'number', default: 262144, description: 'Maximum map count for memory' }
+    ]
+  },
+  {
+    id: 'cachyos-kernel-manager',
+    name: 'CachyOS Kernel Manager',
+    slug: 'cachyos-kernel-manager',
+    description: 'Manage CachyOS optimized kernels',
+    category: 'linux-distros',
+    icon: '🚀',
+    tags: ['cachyos', 'kernel', 'performance', 'optimization'],
+    homepage: 'https://github.com/cachyos/kernel-manager',
+    repository: 'https://github.com/cachyos/kernel-manager',
+    installCommand: 'sudo pacman -S cachyos-kernel-manager',
+    status: 'available',
+    configOptions: [
+      { key: 'kernelType', label: 'Kernel Type', type: 'select', default: 'cachy', options: [
+        { value: 'cachy', label: 'Cachy Kernel (Optimized)' },
+        { value: 'lts', label: 'Linux LTS' },
+        { value: 'zen', label: 'Linux Zen' },
+        { value: 'hardened', label: 'Linux Hardened' },
+        { value: 'rt', label: 'Realtime Kernel' }
+      ]},
+      { key: 'scheduler', label: 'CPU Scheduler', type: 'select', default: 'bore', options: [
+        { value: 'bore', label: 'BORE Scheduler' },
+        { value: 'cachy', label: 'Cachy Scheduler' },
+        { value: 'pds', label: 'PDS Scheduler' },
+        { value: 'bmq', label: 'BMQ Scheduler' }
+      ]}
+    ]
+  },
+  {
+    id: 'archlinux-pacman',
+    name: 'Arch Linux Pacman',
+    slug: 'archlinux-pacman',
+    description: 'Arch Linux package manager with AI tools support',
+    category: 'linux-distros',
+    icon: '📦',
+    tags: ['arch', 'pacman', 'package-manager'],
+    homepage: 'https://archlinux.org/pacman',
+    repository: 'https://gitlab.archlinux.org/pacman/pacman',
+    status: 'available',
+    configOptions: [
+      { key: 'parallelDownloads', label: 'Parallel Downloads', type: 'number', default: 5, description: 'Number of parallel downloads' },
+      { key: 'useAUR', label: 'Enable AUR', type: 'boolean', default: true, description: 'Enable Arch User Repository' }
+    ]
+  },
+  {
+    id: 'yay-aur-helper',
+    name: 'Yay AUR Helper',
+    slug: 'yay-aur-helper',
+    description: 'AUR helper for Arch-based distributions',
+    category: 'linux-distros',
+    icon: '🎉',
+    tags: ['arch', 'aur', 'package-manager', 'yay'],
+    repository: 'https://github.com/Jguer/yay',
+    installCommand: 'sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'paru-aur-helper',
+    name: 'Paru AUR Helper',
+    slug: 'paru-aur-helper',
+    description: 'Rust-based AUR helper',
+    category: 'linux-distros',
+    icon: '🦀',
+    tags: ['arch', 'aur', 'rust', 'package-manager'],
+    repository: 'https://github.com/Morganamilo/paru',
+    installCommand: 'sudo pacman -S --needed base-devel && git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si',
+    status: 'available'
+  },
+  {
+    id: 'fedora-dnf',
+    name: 'Fedora DNF',
+    slug: 'fedora-dnf',
+    description: 'Fedora package manager with AI/ML repos',
+    category: 'linux-distros',
+    icon: '🎩',
+    tags: ['fedora', 'dnf', 'package-manager', 'rpm'],
+    homepage: 'https://dnf.readthedocs.io',
+    status: 'available',
+    configOptions: [
+      { key: 'enableCopr', label: 'Enable COPR', type: 'boolean', default: true, description: 'Enable COPR repositories' },
+      { key: 'enableRPMFusion', label: 'Enable RPM Fusion', type: 'boolean', default: true, description: 'Enable RPM Fusion repos' },
+      { key: 'maxParallelDownloads', label: 'Parallel Downloads', type: 'number', default: 10, description: 'Maximum parallel downloads' }
+    ]
+  },
+  {
+    id: 'nobara-package-manager',
+    name: 'Nobara Package Manager',
+    slug: 'nobara-package-manager',
+    description: 'GloriousEggroll optimized Fedora fork',
+    category: 'linux-distros',
+    icon: '🎮',
+    tags: ['nobara', 'fedora', 'gaming', 'optimized'],
+    homepage: 'https://nobaraproject.org',
+    repository: 'https://gitlab.com/nobara-linux',
+    status: 'available',
+    configOptions: [
+      { key: 'gamingMode', label: 'Gaming Mode', type: 'boolean', default: true, description: 'Enable gaming optimizations' },
+      { key: 'nvidiaDrivers', label: 'NVIDIA Drivers', type: 'boolean', default: false, description: 'Install NVIDIA drivers' }
+    ]
+  },
+  {
+    id: 'ubuntu-apt-ai',
+    name: 'Ubuntu APT with AI PPA',
+    slug: 'ubuntu-apt-ai',
+    description: 'Ubuntu package manager with AI/ML PPAs',
+    category: 'linux-distros',
+    icon: '🟠',
+    tags: ['ubuntu', 'apt', 'ppa', 'ai', 'ml'],
+    homepage: 'https://ubuntu.com/server/docs/package-management',
+    status: 'available',
+    configOptions: [
+      { key: 'enableNvidiaCudaPPA', label: 'NVIDIA CUDA PPA', type: 'boolean', default: true, description: 'Enable NVIDIA CUDA PPA' },
+      { key: 'enableOllamaRepo', label: 'Ollama Repository', type: 'boolean', default: true, description: 'Enable official Ollama repo' }
+    ]
+  },
+  {
+    id: 'nixos-package-manager',
+    name: 'NixOS Package Manager',
+    slug: 'nixos-package-manager',
+    description: 'Declarative package management for reproducible AI environments',
+    category: 'linux-distros',
+    icon: '❄️',
+    tags: ['nix', 'nixos', 'declarative', 'reproducible'],
+    homepage: 'https://nixos.org',
+    repository: 'https://github.com/NixOS/nix',
+    installCommand: 'sh <(curl -L https://nixos.org/nix/install) --daemon',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'enableFlakes', label: 'Enable Flakes', type: 'boolean', default: true, description: 'Enable Nix Flakes' },
+      { key: 'enableHomeManager', label: 'Home Manager', type: 'boolean', default: true, description: 'Enable Home Manager' }
+    ]
+  },
+  {
+    id: 'nixos-ai-flake',
+    name: 'NixOS AI Flake Templates',
+    slug: 'nixos-ai-flake',
+    description: 'Pre-configured Nix flakes for AI/ML development',
+    category: 'linux-distros',
+    icon: '🧊',
+    tags: ['nix', 'flake', 'ai', 'ml', 'template'],
+    repository: 'https://github.com/nix-community/ai-flakes',
+    status: 'available'
+  },
+  {
+    id: 'popos-system76',
+    name: 'Pop!_OS System76 Tools',
+    slug: 'popos-system76',
+    description: 'System76 optimization tools and cosmic desktop',
+    category: 'linux-distros',
+    icon: '🚀',
+    tags: ['popos', 'system76', 'cosmic', 'optimized'],
+    homepage: 'https://pop.system76.com',
+    repository: 'https://github.com/pop-os',
+    status: 'available',
+    configOptions: [
+      { key: 'cosmicDesktop', label: 'COSMIC Desktop', type: 'boolean', default: true, description: 'Use COSMIC desktop environment' },
+      { key: 'nvidiaMode', label: 'NVIDIA Mode', type: 'boolean', default: false, description: 'Enable NVIDIA hybrid graphics' }
+    ]
+  },
+  {
+    id: 'biglinux-tools',
+    name: 'BigLinux Tools',
+    slug: 'biglinux-tools',
+    description: 'BigLinux KDE-optimized tools',
+    category: 'linux-distros',
+    icon: '🐧',
+    tags: ['biglinux', 'kde', 'brazilian', 'optimized'],
+    homepage: 'https://biglinux.com.br',
+    status: 'available',
+    configOptions: [
+      { key: 'kdeOptimizations', label: 'KDE Optimizations', type: 'boolean', default: true, description: 'Enable KDE performance tweaks' },
+      { key: 'biglinuxKernel', label: 'BigLinux Kernel', type: 'boolean', default: true, description: 'Use optimized BigLinux kernel' }
+    ]
+  },
+  {
+    id: 'manjaro-pamac',
+    name: 'Manjaro Pamac',
+    slug: 'manjaro-pamac',
+    description: 'Manjaro GUI package manager with AUR support',
+    category: 'linux-distros',
+    icon: '📦',
+    tags: ['manjaro', 'pamac', 'gui', 'package-manager'],
+    homepage: 'https://gitlab.manjaro.org/applications/pamac',
+    installCommand: 'sudo pacman -S pamac',
+    status: 'available'
+  },
+  {
+    id: 'manjaro-kernel-manager',
+    name: 'Manjaro Kernel Manager',
+    slug: 'manjaro-kernel-manager',
+    description: 'Manage kernels in Manjaro Linux',
+    category: 'linux-distros',
+    icon: '🔧',
+    tags: ['manjaro', 'kernel', 'management'],
+    repository: 'https://gitlab.manjaro.org/applications/mhwd',
+    installCommand: 'sudo pacman -S mhwd',
+    status: 'available',
+    configOptions: [
+      { key: 'kernelVersion', label: 'Kernel Version', type: 'select', default: 'latest', options: [
+        { value: 'latest', label: 'Latest Stable' },
+        { value: 'lts', label: 'Long Term Support' },
+        { value: 'rt', label: 'Realtime' }
+      ]}
+    ]
+  },
+  {
+    id: 'snap-package-manager',
+    name: 'Snap Package Manager',
+    slug: 'snap-package-manager',
+    description: 'Universal Linux package manager',
+    category: 'linux-distros',
+    icon: '📦',
+    tags: ['snap', 'ubuntu', 'universal', 'containerized'],
+    homepage: 'https://snapcraft.io',
+    installCommand: 'sudo dnf install snapd',
+    status: 'available',
+    configOptions: [
+      { key: 'enableClassic', label: 'Enable Classic', type: 'boolean', default: true, description: 'Enable classic confinement' }
+    ]
+  },
+  {
+    id: 'flatpak-package-manager',
+    name: 'Flatpak Package Manager',
+    slug: 'flatpak-package-manager',
+    description: 'Flatpak for sandboxed applications',
+    category: 'linux-distros',
+    icon: '📦',
+    tags: ['flatpak', 'sandbox', 'universal'],
+    homepage: 'https://flatpak.org',
+    installCommand: 'sudo dnf install flatpak',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'enableFlathub', label: 'Enable Flathub', type: 'boolean', default: true, description: 'Enable Flathub repository' }
+    ]
+  },
+  {
+    id: 'appimage-runner',
+    name: 'AppImage Runner',
+    slug: 'appimage-runner',
+    description: 'Run AppImages on any Linux distribution',
+    category: 'linux-distros',
+    icon: '📦',
+    tags: ['appimage', 'portable', 'universal'],
+    repository: 'https://github.com/AppImage/AppImageKit',
+    installCommand: 'sudo dnf install appimage-launcher',
+    status: 'available'
+  },
+  {
+    id: 'distrobox',
+    name: 'Distrobox',
+    slug: 'distrobox',
+    description: 'Run any Linux distribution inside containers',
+    category: 'linux-distros',
+    icon: '🐳',
+    tags: ['container', 'distro', 'toolbox', 'podman'],
+    homepage: 'https://distrobox.it',
+    repository: 'https://github.com/89luca89/distrobox',
+    installCommand: 'curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --prefix ~/.local',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'containerManager', label: 'Container Manager', type: 'select', default: 'podman', options: [
+        { value: 'podman', label: 'Podman' },
+        { value: 'docker', label: 'Docker' }
+      ]},
+      { key: 'defaultDistro', label: 'Default Distro', type: 'select', default: 'fedora', options: [
+        { value: 'fedora', label: 'Fedora' },
+        { value: 'ubuntu', label: 'Ubuntu' },
+        { value: 'arch', label: 'Arch Linux' },
+        { value: 'debian', label: 'Debian' }
+      ]}
+    ]
+  },
+  {
+    id: 'toolbox-fedora',
+    name: 'Fedora Toolbox',
+    slug: 'toolbox-fedora',
+    description: 'Container-based development environments',
+    category: 'linux-distros',
+    icon: '🧰',
+    tags: ['fedora', 'toolbox', 'container', 'development'],
+    homepage: 'https://containertoolbx.org',
+    repository: 'https://github.com/containers/toolbox',
+    installCommand: 'sudo dnf install toolbox',
+    isPopular: true,
+    status: 'available'
+  },
+  {
+    id: 'homebrew-linux',
+    name: 'Homebrew for Linux',
+    slug: 'homebrew-linux',
+    description: 'The missing package manager for Linux',
+    category: 'linux-distros',
+    icon: '🍺',
+    tags: ['homebrew', 'brew', 'package-manager', 'macos-like'],
+    homepage: 'https://brew.sh',
+    repository: 'https://github.com/Homebrew/brew',
+    installCommand: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"',
+    isPopular: true,
+    status: 'available'
+  },
+
+  // ==========================================
+  // DESKTOP ENVIRONMENTS (10+)
+  // ==========================================
+  {
+    id: 'kde-plasma',
+    name: 'KDE Plasma',
+    slug: 'kde-plasma',
+    description: 'Modern, customizable desktop environment',
+    category: 'linux-distros',
+    icon: '🖥️',
+    tags: ['kde', 'plasma', 'desktop', 'customizable'],
+    homepage: 'https://kde.org/plasma-desktop',
+    installCommand: 'sudo dnf groupinstall "KDE Plasma Workspaces"',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'compositor', label: 'Compositor', type: 'select', default: 'kwin', options: [
+        { value: 'kwin', label: 'KWin (Default)' },
+        { value: 'picom', label: 'Picom' }
+      ]},
+      { key: 'enableWayland', label: 'Enable Wayland', type: 'boolean', default: true, description: 'Use Wayland session' }
+    ]
+  },
+  {
+    id: 'gnome-desktop',
+    name: 'GNOME Desktop',
+    slug: 'gnome-desktop',
+    description: 'Clean, modern desktop environment',
+    category: 'linux-distros',
+    icon: '🦶',
+    tags: ['gnome', 'desktop', 'modern', 'gtk'],
+    homepage: 'https://gnome.org',
+    installCommand: 'sudo dnf groupinstall "GNOME Desktop"',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'enableExtensions', label: 'Enable Extensions', type: 'boolean', default: true, description: 'Enable GNOME extensions' },
+      { key: 'enableWayland', label: 'Enable Wayland', type: 'boolean', default: true, description: 'Use Wayland session' }
+    ]
+  },
+  {
+    id: 'hyprland-desktop',
+    name: 'Hyprland',
+    slug: 'hyprland-desktop',
+    description: 'Dynamic tiling Wayland compositor',
+    category: 'linux-distros',
+    icon: '🌊',
+    tags: ['hyprland', 'wayland', 'tiling', 'compositor'],
+    homepage: 'https://hyprland.org',
+    repository: 'https://github.com/hyprwm/Hyprland',
+    installCommand: 'sudo dnf install hyprland',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'animations', label: 'Enable Animations', type: 'boolean', default: true, description: 'Enable window animations' },
+      { key: 'blur', label: 'Enable Blur', type: 'boolean', default: true, description: 'Enable blur effects' },
+      { key: 'vrr', label: 'Variable Refresh Rate', type: 'boolean', default: false, description: 'Enable VRR support' }
+    ]
+  },
+  {
+    id: 'sway-desktop',
+    name: 'Sway',
+    slug: 'sway-desktop',
+    description: 'i3-compatible Wayland compositor',
+    category: 'linux-distros',
+    icon: '🍃',
+    tags: ['sway', 'wayland', 'i3', 'tiling'],
+    homepage: 'https://swaywm.org',
+    repository: 'https://github.com/swaywm/sway',
+    installCommand: 'sudo dnf install sway',
+    status: 'available',
+    configOptions: [
+      { key: 'xwayland', label: 'XWayland Support', type: 'boolean', default: true, description: 'Enable XWayland for X11 apps' }
+    ]
+  },
+  {
+    id: 'cosmic-desktop',
+    name: 'COSMIC Desktop',
+    slug: 'cosmic-desktop',
+    description: 'System76 Rust-based desktop environment',
+    category: 'linux-distros',
+    icon: '🌌',
+    tags: ['cosmic', 'system76', 'rust', 'wayland'],
+    homepage: 'https://github.com/pop-os/cosmic-desktop',
+    repository: 'https://github.com/pop-os/cosmic-desktop',
+    status: 'available',
+    configOptions: [
+      { key: 'enableAnimations', label: 'Enable Animations', type: 'boolean', default: true, description: 'Enable desktop animations' }
+    ]
+  },
+
+  // ==========================================
+  // GPU & DRIVER TOOLS (10+)
+  // ==========================================
+  {
+    id: 'nvidia-driver-linux',
+    name: 'NVIDIA Driver Linux',
+    slug: 'nvidia-driver-linux',
+    description: 'NVIDIA proprietary driver for Linux',
+    category: 'linux-distros',
+    icon: '💚',
+    tags: ['nvidia', 'driver', 'gpu', 'proprietary'],
+    homepage: 'https://www.nvidia.com/Download/index.aspx',
+    installCommand: 'sudo dnf install akmod-nvidia',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'cudaSupport', label: 'CUDA Support', type: 'boolean', default: true, description: 'Install CUDA toolkit' },
+      { key: 'vulkanSupport', label: 'Vulkan Support', type: 'boolean', default: true, description: 'Install Vulkan support' },
+      { key: 'powerManagement', label: 'Power Management', type: 'boolean', default: true, description: 'Enable power management' }
+    ]
+  },
+  {
+    id: 'amdgpu-driver-linux',
+    name: 'AMDGPU Driver Linux',
+    slug: 'amdgpu-driver-linux',
+    description: 'AMD open-source GPU driver',
+    category: 'linux-distros',
+    icon: '❤️',
+    tags: ['amd', 'gpu', 'driver', 'open-source'],
+    homepage: 'https://www.amd.com/en/support',
+    installCommand: 'sudo dnf install mesa-vulkan-drivers mesa-dri-drivers',
+    isPopular: true,
+    status: 'available',
+    configOptions: [
+      { key: 'rocmSupport', label: 'ROCm Support', type: 'boolean', default: true, description: 'Install ROCm for ML' },
+      { key: 'vulkanSupport', label: 'Vulkan Support', type: 'boolean', default: true, description: 'Install Vulkan support' }
+    ]
+  },
+  {
+    id: 'intel-gpu-driver-linux',
+    name: 'Intel GPU Driver Linux',
+    slug: 'intel-gpu-driver-linux',
+    description: 'Intel graphics driver and compute',
+    category: 'linux-distros',
+    icon: '💙',
+    tags: ['intel', 'gpu', 'driver', 'arc'],
+    homepage: 'https://www.intel.com/content/www/us/en/products/docs/discrete-gpus/arc/software.html',
+    installCommand: 'sudo dnf install intel-media-driver mesa-vulkan-drivers',
+    status: 'available',
+    configOptions: [
+      { key: 'oneapi', label: 'OneAPI Support', type: 'boolean', default: true, description: 'Install Intel oneAPI' },
+      { key: 'levelZero', label: 'Level Zero', type: 'boolean', default: true, description: 'Install Level Zero runtime' }
+    ]
+  },
+  {
+    id: 'nvidia-container-toolkit-linux',
+    name: 'NVIDIA Container Toolkit',
+    slug: 'nvidia-container-toolkit-linux',
+    description: 'GPU support for containers',
+    category: 'linux-distros',
+    icon: '🐳',
+    tags: ['nvidia', 'container', 'docker', 'podman'],
+    homepage: 'https://docs.nvidia.com/datacenter/cloud-native/container-toolkit',
+    repository: 'https://github.com/NVIDIA/nvidia-container-toolkit',
+    installCommand: 'sudo dnf install nvidia-container-toolkit',
+    isPopular: true,
+    status: 'available'
+  },
+
+  // ==========================================
   // MOBILE AI & TERMUX (10+)
   // ==========================================
   {
