@@ -1,0 +1,112 @@
+{
+  "name": "web-search",
+  "version": "1.0.0",
+  "description": "Comprehensive web search and research skills for AI agents",
+  "author": "RHEL AI Setup",
+  "category": "research",
+  "tags": ["search", "web", "research", "tavily", "exa"],
+  "tools": [
+    {
+      "name": "tavily_search",
+      "description": "Search the web using Tavily API",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "The search query",
+          "required": true
+        },
+        "max_results": {
+          "type": "integer",
+          "description": "Maximum number of results",
+          "default": 5
+        },
+        "search_depth": {
+          "type": "string",
+          "description": "Search depth: basic or advanced",
+          "default": "basic"
+        }
+      }
+    },
+    {
+      "name": "exa_search",
+      "description": "Neural search using Exa API",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "The search query",
+          "required": true
+        },
+        "num_results": {
+          "type": "integer",
+          "description": "Number of results",
+          "default": 10
+        },
+        "use_autoprompt": {
+          "type": "boolean",
+          "description": "Let Exa optimize the query",
+          "default": true
+        }
+      }
+    },
+    {
+      "name": "brave_search",
+      "description": "Search using Brave Search API",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "The search query",
+          "required": true
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of results",
+          "default": 10
+        }
+      }
+    },
+    {
+      "name": "firecrawl_scrape",
+      "description": "Scrape and extract content from URLs",
+      "parameters": {
+        "url": {
+          "type": "string",
+          "description": "URL to scrape",
+          "required": true
+        },
+        "formats": {
+          "type": "array",
+          "description": "Output formats",
+          "default": ["markdown"]
+        }
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "name": "research_topic",
+      "description": "Deep research on a topic",
+      "steps": [
+        {"tool": "tavily_search", "params": {"search_depth": "advanced"}},
+        {"tool": "firecrawl_scrape", "params": {}},
+        {"tool": "exa_search", "params": {"use_autoprompt": true}}
+      ]
+    },
+    {
+      "name": "quick_search",
+      "description": "Quick web search",
+      "steps": [
+        {"tool": "brave_search", "params": {"count": 5}}
+      ]
+    }
+  ],
+  "requirements": {
+    "python": ">=3.10",
+    "packages": ["tavily-python", "metaphor-python", "firecrawl-py"]
+  },
+  "env_vars": {
+    "TAVILY_API_KEY": "Required for Tavily search",
+    "EXA_API_KEY": "Required for Exa search",
+    "BRAVE_API_KEY": "Required for Brave search",
+    "FIRECRAWL_API_KEY": "Required for Firecrawl"
+  }
+}

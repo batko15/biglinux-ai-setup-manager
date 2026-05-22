@@ -1,0 +1,96 @@
+{
+  "name": "data-processor",
+  "version": "1.0.0",
+  "description": "Data processing and transformation skills for AI agents",
+  "author": "RHEL AI Setup",
+  "category": "data",
+  "tags": ["data", "etl", "database", "transformation"],
+  "tools": [
+    {
+      "name": "sql_query",
+      "description": "Execute SQL query",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "SQL query to execute",
+          "required": true
+        },
+        "database": {
+          "type": "string",
+          "description": "Database connection name"
+        }
+      }
+    },
+    {
+      "name": "read_csv",
+      "description": "Read CSV file into dataframe",
+      "parameters": {
+        "file_path": {"type": "string", "required": true},
+        "delimiter": {"type": "string", "default": ","}
+      }
+    },
+    {
+      "name": "read_json",
+      "description": "Read JSON file",
+      "parameters": {
+        "file_path": {"type": "string", "required": true}
+      }
+    },
+    {
+      "name": "transform_data",
+      "description": "Apply transformation to data",
+      "parameters": {
+        "data": {"type": "object", "required": true},
+        "transformations": {
+          "type": "array",
+          "description": "List of transformations to apply"
+        }
+      }
+    },
+    {
+      "name": "export_data",
+      "description": "Export data to file",
+      "parameters": {
+        "data": {"type": "object", "required": true},
+        "format": {
+          "type": "string",
+          "enum": ["csv", "json", "parquet", "excel"]
+        },
+        "output_path": {"type": "string", "required": true}
+      }
+    },
+    {
+      "name": "validate_data",
+      "description": "Validate data against schema",
+      "parameters": {
+        "data": {"type": "object", "required": true},
+        "schema": {"type": "object", "required": true}
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "name": "etl_pipeline",
+      "description": "Extract, transform, load pipeline",
+      "steps": [
+        {"tool": "read_csv", "params": {}},
+        {"tool": "validate_data", "params": {}},
+        {"tool": "transform_data", "params": {}},
+        {"tool": "export_data", "params": {"format": "parquet"}}
+      ]
+    },
+    {
+      "name": "data_analysis",
+      "description": "Analyze data from database",
+      "steps": [
+        {"tool": "sql_query", "params": {}},
+        {"tool": "transform_data", "params": {}},
+        {"tool": "export_data", "params": {"format": "json"}}
+      ]
+    }
+  ],
+  "requirements": {
+    "python": ">=3.10",
+    "packages": ["pandas", "polars", "sqlalchemy", "duckdb"]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "name": "code-assistant",
+  "version": "1.0.0",
+  "description": "Code generation, analysis, and modification skills for AI agents",
+  "author": "RHEL AI Setup",
+  "category": "development",
+  "tags": ["code", "github", "git", "programming"],
+  "tools": [
+    {
+      "name": "github_search_code",
+      "description": "Search code on GitHub",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "Search query",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "description": "Programming language filter"
+        }
+      }
+    },
+    {
+      "name": "github_create_pr",
+      "description": "Create a pull request",
+      "parameters": {
+        "owner": {"type": "string", "required": true},
+        "repo": {"type": "string", "required": true},
+        "title": {"type": "string", "required": true},
+        "body": {"type": "string"},
+        "head": {"type": "string", "required": true},
+        "base": {"type": "string", "default": "main"}
+      }
+    },
+    {
+      "name": "filesystem_read_file",
+      "description": "Read a file from the filesystem",
+      "parameters": {
+        "path": {
+          "type": "string",
+          "description": "File path",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "filesystem_write_file",
+      "description": "Write content to a file",
+      "parameters": {
+        "path": {"type": "string", "required": true},
+        "content": {"type": "string", "required": true}
+      }
+    },
+    {
+      "name": "git_commit",
+      "description": "Commit changes to git",
+      "parameters": {
+        "message": {
+          "type": "string",
+          "description": "Commit message",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "git_push",
+      "description": "Push changes to remote",
+      "parameters": {
+        "branch": {
+          "type": "string",
+          "default": "main"
+        }
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "name": "fix_bug",
+      "description": "Analyze and fix a bug",
+      "steps": [
+        {"tool": "filesystem_read_file", "params": {}},
+        {"tool": "github_search_code", "params": {}},
+        {"tool": "filesystem_write_file", "params": {}},
+        {"tool": "git_commit", "params": {}}
+      ]
+    },
+    {
+      "name": "create_feature",
+      "description": "Create a new feature",
+      "steps": [
+        {"tool": "github_search_code", "params": {}},
+        {"tool": "filesystem_write_file", "params": {}},
+        {"tool": "git_commit", "params": {}},
+        {"tool": "git_push", "params": {}},
+        {"tool": "github_create_pr", "params": {}}
+      ]
+    }
+  ],
+  "requirements": {
+    "python": ">=3.10",
+    "packages": ["PyGithub", "gitpython"]
+  },
+  "env_vars": {
+    "GITHUB_TOKEN": "Required for GitHub operations"
+  }
+}

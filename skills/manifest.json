@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "name": "RHEL AI Skills Collection",
+  "description": "Pre-built skills for AI agents",
+  "skills": [
+    {
+      "name": "web-search",
+      "description": "Web search and research skills",
+      "version": "1.0.0",
+      "tools": ["tavily", "exa", "brave-search", "serper"],
+      "agents": ["langchain", "crewai", "autogen"]
+    },
+    {
+      "name": "code-assistant",
+      "description": "Code generation and analysis skills",
+      "version": "1.0.0",
+      "tools": ["github", "filesystem", "git"],
+      "agents": ["aider", "continue", "cursor"]
+    },
+    {
+      "name": "document-analyzer",
+      "description": "Document processing and analysis",
+      "version": "1.0.0",
+      "tools": ["filesystem", "memory", "vector-store"],
+      "agents": ["langchain", "llamaindex", "haystack"]
+    },
+    {
+      "name": "data-processor",
+      "description": "Data processing and transformation",
+      "version": "1.0.0",
+      "tools": ["postgres", "sqlite", "pandas"],
+      "agents": ["langchain", "phidata"]
+    }
+  ]
+}

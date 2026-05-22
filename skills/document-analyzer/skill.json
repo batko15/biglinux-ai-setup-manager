@@ -1,0 +1,89 @@
+{
+  "name": "document-analyzer",
+  "version": "1.0.0",
+  "description": "Document processing, analysis, and RAG skills for AI agents",
+  "author": "RHEL AI Setup",
+  "category": "document-processing",
+  "tags": ["documents", "rag", "analysis", "pdf", "markdown"],
+  "tools": [
+    {
+      "name": "extract_text",
+      "description": "Extract text from documents",
+      "parameters": {
+        "file_path": {
+          "type": "string",
+          "description": "Path to document",
+          "required": true
+        },
+        "extract_images": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    {
+      "name": "chunk_text",
+      "description": "Split text into chunks for processing",
+      "parameters": {
+        "text": {"type": "string", "required": true},
+        "chunk_size": {"type": "integer", "default": 512},
+        "overlap": {"type": "integer", "default": 50}
+      }
+    },
+    {
+      "name": "embed_chunks",
+      "description": "Create embeddings for text chunks",
+      "parameters": {
+        "chunks": {
+          "type": "array",
+          "description": "Text chunks to embed",
+          "required": true
+        },
+        "model": {
+          "type": "string",
+          "default": "nomic-embed-text"
+        }
+      }
+    },
+    {
+      "name": "store_embeddings",
+      "description": "Store embeddings in vector database",
+      "parameters": {
+        "embeddings": {"type": "array", "required": true},
+        "metadata": {"type": "object"},
+        "collection": {"type": "string", "default": "documents"}
+      }
+    },
+    {
+      "name": "search_similar",
+      "description": "Search for similar documents",
+      "parameters": {
+        "query": {"type": "string", "required": true},
+        "top_k": {"type": "integer", "default": 5}
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "name": "ingest_document",
+      "description": "Ingest a document into RAG system",
+      "steps": [
+        {"tool": "extract_text", "params": {}},
+        {"tool": "chunk_text", "params": {"chunk_size": 512}},
+        {"tool": "embed_chunks", "params": {}},
+        {"tool": "store_embeddings", "params": {}}
+      ]
+    },
+    {
+      "name": "query_documents",
+      "description": "Query the document collection",
+      "steps": [
+        {"tool": "search_similar", "params": {"top_k": 5}}
+      ]
+    }
+  ],
+  "requirements": {
+    "python": ">=3.10",
+    "packages": ["unstructured", "chromadb", "langchain", "sentence-transformers"]
+  }
+}
